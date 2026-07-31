@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin — Harlej Revival</title>
+<link rel="icon" type="image/webp" href="/img/favicon.webp">
+<meta name="description" content="Administrační panel webu Harlej Revival Olomouc.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #161210;
+    --paper: #EDE6D6;
+    --paper-dim: #DCD3BD;
+    --amber: #E8A33D;
+    --rust: #C0392B;
+    --surface: #1d1815;
+    --border: rgba(237,230,214,0.15);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--ink);
+    color: var(--paper);
+    font-family: 'Space Mono', monospace;
+    font-size: 0.9rem;
+    min-height: 100vh;
+  }
+
+  /* --- LOGIN --- */
+  #login-screen {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+  .login-box {
+    width: 100%;
+    max-width: 380px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 40px 36px;
+  }
+  .login-logo {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--paper-dim);
+    margin-bottom: 6px;
+  }
+  .login-logo span { color: var(--amber); }
+  .login-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.4rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+  }
+  .field-label {
+    font-size: 0.7rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--amber);
+    display: block;
+    margin-bottom: 8px;
+  }
+  .input {
+    background: var(--ink);
+    border: 1px solid var(--border);
+    color: var(--paper);
+    padding: 11px 14px;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.88rem;
+    width: 100%;
+    outline: none;
+    transition: border-color .15s;
+  }
+  .input:focus { border-color: var(--amber); }
+  .input::placeholder { color: rgba(237,230,214,0.3); }
+  .btn-primary {
+    background: var(--rust);
+    color: var(--paper);
+    border: none;
+    padding: 13px 24px;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 14px;
+    transition: background .15s;
+  }
+  .btn-primary:hover:not(:disabled) { background: #a5301f; }
+  .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+  .login-error {
+    color: var(--rust);
+    font-size: 0.8rem;
+    margin-top: 12px;
+    min-height: 1.2em;
+  }
+
+  /* --- ADMIN HEADER --- */
+  #admin-screen { display: none; }
+  .admin-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(22,18,16,0.97);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 28px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .header-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--paper-dim);
+    white-space: nowrap;
+  }
+  .header-title span { color: var(--amber); }
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .save-status {
+    font-size: 0.78rem;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+  }
+  .save-status.success { color: #4caf82; }
+  .save-status.error { color: var(--rust); }
+  .btn-save {
+    background: var(--rust);
+    color: var(--paper);
+    border: none;
+    padding: 10px 20px;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.8rem;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background .15s;
+  }
+  .btn-save:hover:not(:disabled) { background: #a5301f; }
+  .btn-save:disabled { opacity: 0.5; cursor: not-allowed; }
+  .btn-logout {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--paper-dim);
+    padding: 8px 14px;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.78rem;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .btn-logout:hover { border-color: var(--paper-dim); }
+
+  /* --- MAIN CONTENT --- */
+  .admin-main {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 32px 24px 80px;
+  }
+
+  /* --- SECTIONS --- */
+  .section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 24px 26px;
+    margin-bottom: 18px;
+  }
+  .section-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.95rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .field-group { margin-bottom: 14px; }
+  .field-group .field-label { margin-bottom: 6px; }
+
+  /* --- ROWS (roster, setlist) --- */
+  .row {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+  .row-num {
+    font-size: 0.72rem;
+    color: var(--paper-dim);
+    width: 24px;
+    flex-shrink: 0;
+    text-align: right;
+  }
+  .btn-remove {
+    background: transparent;
+    border: 1px solid rgba(192,57,43,0.4);
+    color: var(--rust);
+    width: 32px;
+    height: 34px;
+    cursor: pointer;
+    font-size: 1rem;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background .15s;
+  }
+  .btn-remove:hover { background: rgba(192,57,43,0.15); }
+  .btn-add {
+    background: transparent;
+    border: 1px dashed rgba(232,163,61,0.4);
+    color: var(--amber);
+    padding: 9px 16px;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.8rem;
+    cursor: pointer;
+    margin-top: 6px;
+    width: 100%;
+    transition: background .15s, border-color .15s;
+  }
+  .btn-add:hover { background: rgba(232,163,61,0.08); border-color: var(--amber); }
+
+  /* --- STATS GRID --- */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 8px 12px;
+    align-items: center;
+  }
+  .stats-grid .col-header {
+    font-size: 0.68rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--paper-dim);
+    padding-bottom: 4px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 4px;
+  }
+
+  /* --- CONTACT PAIRS --- */
+  .contact-pair {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+  @media (max-width: 560px) {
+    .contact-pair { grid-template-columns: 1fr; }
+  }
+  .section-sub {
+    font-size: 0.7rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--paper-dim);
+    margin: 18px 0 10px;
+    padding-top: 14px;
+    border-top: 1px solid var(--border);
+  }
+  .section-sub:first-of-type { margin-top: 0; border-top: none; padding-top: 0; }
+
+  /* --- BACK TO SITE LINK --- */
+  .back-link {
+    display: inline-block;
+    color: var(--paper-dim);
+    font-size: 0.78rem;
+    text-decoration: none;
+    margin-bottom: 24px;
+    padding-bottom: 2px;
+    border-bottom: 1px solid transparent;
+  }
+  .back-link:hover { color: var(--paper); border-color: var(--border); }
+
+  /* --- GIGS --- */
+  .gig-row-admin {
+    display: grid;
+    grid-template-columns: 140px 1fr 100px 32px;
+    gap: 8px;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+  @media (max-width: 600px) {
+    .gig-row-admin { grid-template-columns: 1fr 32px; }
+    .gig-row-admin .gig-venue-input,
+    .gig-row-admin .gig-city-input { grid-column: 1; }
+    .gig-row-admin .gig-date-input { grid-column: 1; }
+    .gig-row-admin .btn-remove { grid-column: 2; grid-row: 1; }
+  }
+
+  ::selection { background: var(--rust); color: var(--paper); }
+  :focus-visible { outline: 2px solid var(--amber); outline-offset: 2px; }
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="login-screen">
+  <div class="login-box">
+    <div class="login-logo">Harlej <span>Revival</span> Olomouc</div>
+    <div class="login-title">Admin panel</div>
+    <label class="field-label" for="pw-input">Heslo</label>
+    <input class="input" type="password" id="pw-input" placeholder="Zadejte heslo" autocomplete="current-password">
+    <button class="btn-primary" id="login-btn" onclick="tryLogin()">Přihlásit se</button>
+    <div class="login-error" id="login-error"></div>
+  </div>
+</div>
+
+<!-- ADMIN -->
+<div id="admin-screen">
+  <header class="admin-header">
+    <div class="header-title">Harlej <span>Revival</span> — Admin</div>
+    <div class="header-right">
+      <span class="save-status" id="save-status"></span>
+      <button class="btn-save" id="save-btn" onclick="saveContent()">Uložit vše</button>
+      <button class="btn-logout" onclick="logout()">Odhlásit</button>
+    </div>
+  </header>
+
+  <main class="admin-main">
+    <a class="back-link" href="/">← Zpět na web</a>
+
+    <!-- STATISTIKY -->
+    <div class="section">
+      <div class="section-title">Statistiky (hero sekce)</div>
+      <div class="stats-grid">
+        <div class="col-header">Číslo / hodnota</div>
+        <div class="col-header">Popis</div>
+      </div>
+      <div id="stats-container"></div>
+    </div>
+
+    <!-- ČLENOVÉ -->
+    <div class="section">
+      <div class="section-title">Členové kapely</div>
+      <div id="roster-container"></div>
+      <button class="btn-add" onclick="addRosterRow()">+ Přidat člena</button>
+    </div>
+
+    <!-- SETLIST -->
+    <div class="section">
+      <div class="section-title">Setlist / repertoár</div>
+      <div id="setlist-container"></div>
+      <button class="btn-add" onclick="addSetlistRow()">+ Přidat píseň</button>
+    </div>
+
+    <!-- INFO O SHOW -->
+    <div class="section">
+      <div class="section-title">Info o show (lístek)</div>
+      <div class="field-group">
+        <label class="field-label" for="show-duration">Délka show</label>
+        <input class="input" type="text" id="show-duration" placeholder="např. až 90 min">
+      </div>
+      <div class="field-group">
+        <label class="field-label" for="show-format">Formát</label>
+        <input class="input" type="text" id="show-format" placeholder="např. sólo i vedle dalších kapel">
+      </div>
+    </div>
+
+    <!-- TERMÍNY -->
+    <div class="section">
+      <div class="section-title">Termíny koncertů</div>
+      <div style="display:grid; grid-template-columns:140px 1fr 100px 32px; gap:8px; margin-bottom:6px;">
+        <div class="col-header" style="font-size:0.65rem; letter-spacing:1px; text-transform:uppercase; color:var(--paper-dim); padding-bottom:4px; border-bottom:1px solid var(--border);">Datum</div>
+        <div class="col-header" style="font-size:0.65rem; letter-spacing:1px; text-transform:uppercase; color:var(--paper-dim); padding-bottom:4px; border-bottom:1px solid var(--border);">Obec</div>
+        <div class="col-header" style="font-size:0.65rem; letter-spacing:1px; text-transform:uppercase; color:var(--paper-dim); padding-bottom:4px; border-bottom:1px solid var(--border);">Název akce</div>
+        <div></div>
+      </div>
+      <div id="gigs-container"></div>
+      <div class="field-group" style="margin-top:10px;">
+        <label class="field-label" for="gig-ticket-note" style="font-size:0.65rem; color:var(--paper-dim);">Odkaz na akci je volitelný — pokud zůstane prázdný, tlačítko se nezobrazí</label>
+      </div>
+      <button class="btn-add" onclick="addGigRow()">+ Přidat termín</button>
+    </div>
+
+    <!-- KONTAKT -->
+    <div class="section">
+      <div class="section-title">Kontakt &amp; sociální sítě</div>
+
+      <div class="section-sub">Booking</div>
+      <div class="contact-pair">
+        <div>
+          <label class="field-label" for="booking-label">Text odkazu</label>
+          <input class="input" type="text" id="booking-label" placeholder="Drát Production...">
+        </div>
+        <div>
+          <label class="field-label" for="booking-href">URL</label>
+          <input class="input" type="text" id="booking-href" placeholder="https://...">
+        </div>
+      </div>
+
+      <div class="section-sub">E-mail</div>
+      <div class="contact-pair">
+        <div>
+          <label class="field-label" for="email-label">Text odkazu</label>
+          <input class="input" type="text" id="email-label" placeholder="E-mail">
+        </div>
+        <div>
+          <label class="field-label" for="email-href">href</label>
+          <input class="input" type="text" id="email-href" placeholder="mailto:kapela@example.com">
+        </div>
+      </div>
+
+      <div class="section-sub">Telefon</div>
+      <div class="contact-pair">
+        <div>
+          <label class="field-label" for="phone-label">Text odkazu</label>
+          <input class="input" type="text" id="phone-label" placeholder="Telefon">
+        </div>
+        <div>
+          <label class="field-label" for="phone-href">href</label>
+          <input class="input" type="text" id="phone-href" placeholder="tel:+420...">
+        </div>
+      </div>
+
+      <div class="section-sub">Sociální sítě</div>
+      <div class="field-group">
+        <label class="field-label" for="facebook-href">Facebook URL</label>
+        <input class="input" type="text" id="facebook-href" placeholder="https://www.facebook.com/...">
+      </div>
+      <div class="field-group">
+        <label class="field-label" for="instagram-href">Instagram URL</label>
+        <input class="input" type="text" id="instagram-href" placeholder="https://www.instagram.com/...">
+      </div>
+      <div class="field-group">
+        <label class="field-label" for="youtube-href">YouTube URL</label>
+        <input class="input" type="text" id="youtube-href" placeholder="https://www.youtube.com/...">
+      </div>
+    </div>
+  </main>
+</div>
+
+<script>
+const SESSION_KEY = 'hr_admin_pw';
+let currentPassword = '';
+
+// --- INIT ---
+(function init() {
+  const stored = sessionStorage.getItem(SESSION_KEY);
+  if (stored) {
+    currentPassword = stored;
+    verifyAndLoad();
+  }
+
+  document.getElementById('pw-input').addEventListener('keydown', function (e) {
+    if (e.key === 'Enter') tryLogin();
+  });
+})();
+
+async function verifyAndLoad() {
+  try {
+    const res = await fetch('/api/admin/verify', {
+      headers: { 'X-Admin-Password': currentPassword }
+    });
+    if (res.ok) {
+      await loadContent();
+      return;
+    }
+  } catch {}
+  sessionStorage.removeItem(SESSION_KEY);
+  currentPassword = '';
+}
+
+// --- LOGIN ---
+async function tryLogin() {
+  const pw = document.getElementById('pw-input').value;
+  const errEl = document.getElementById('login-error');
+  const btn = document.getElementById('login-btn');
+  errEl.textContent = '';
+  btn.disabled = true;
+  btn.textContent = 'Ověřuji…';
+
+  try {
+    const res = await fetch('/api/admin/verify', {
+      headers: { 'X-Admin-Password': pw }
+    });
+    if (res.ok) {
+      currentPassword = pw;
+      sessionStorage.setItem(SESSION_KEY, pw);
+      await loadContent();
+    } else if (res.status === 503) {
+      errEl.textContent = 'ADMIN_PASSWORD není nastaveno v .env na serveru.';
+    } else {
+      errEl.textContent = 'Nesprávné heslo.';
+    }
+  } catch {
+    errEl.textContent = 'Síťová chyba — je server spuštěný?';
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Přihlásit se';
+  }
+}
+
+function logout() {
+  sessionStorage.removeItem(SESSION_KEY);
+  currentPassword = '';
+  document.getElementById('admin-screen').style.display = 'none';
+  document.getElementById('login-screen').style.display = 'flex';
+  document.getElementById('pw-input').value = '';
+  document.getElementById('login-error').textContent = '';
+}
+
+// --- LOAD CONTENT ---
+async function loadContent() {
+  try {
+    const res = await fetch('/api/content');
+    if (!res.ok) throw new Error('Obsah nenalezen');
+    const data = await res.json();
+    populateForm(data);
+  } catch {
+    // Pokud content.json chybí, formulář zůstane prázdný
+  }
+  document.getElementById('login-screen').style.display = 'none';
+  document.getElementById('admin-screen').style.display = 'block';
+}
+
+function populateForm(data) {
+  // Stats
+  const sc = document.getElementById('stats-container');
+  sc.innerHTML = '';
+  const stats = data.stats || [{ num: '', lbl: '' }, { num: '', lbl: '' }, { num: '', lbl: '' }];
+  stats.forEach(function (s) { addStatRow(s.num, s.lbl); });
+
+  // Roster
+  const rc = document.getElementById('roster-container');
+  rc.innerHTML = '';
+  (data.roster || []).forEach(function (m) { addRosterRow(m.role, m.desc); });
+
+  // Setlist
+  const slc = document.getElementById('setlist-container');
+  slc.innerHTML = '';
+  (data.setlist || []).forEach(function (s) { addSetlistRow(s.title); });
+  updateSetlistNumbers();
+
+  // Gigs
+  var gc = document.getElementById('gigs-container');
+  gc.innerHTML = '';
+  (data.gigs || []).forEach(function (g) { addGigRow(g.date, g.venue, g.city, g.ticketHref); });
+
+  // Show info
+  document.getElementById('show-duration').value = (data.showInfo || {}).duration || '';
+  document.getElementById('show-format').value = (data.showInfo || {}).format || '';
+
+  // Contact
+  const c = data.contact || {};
+  document.getElementById('booking-label').value = c.bookingLabel || '';
+  document.getElementById('booking-href').value = c.bookingHref || '';
+  document.getElementById('email-label').value = c.emailLabel || '';
+  document.getElementById('email-href').value = c.emailHref || '';
+  document.getElementById('phone-label').value = c.phoneLabel || '';
+  document.getElementById('phone-href').value = c.phoneHref || '';
+  document.getElementById('facebook-href').value = c.facebookHref || '';
+  document.getElementById('instagram-href').value = c.instagramHref || '';
+  document.getElementById('youtube-href').value = c.youtubeHref || '';
+}
+
+// --- STATS ROWS (fixed 3) ---
+function addStatRow(num, lbl) {
+  const container = document.getElementById('stats-container');
+  const row = document.createElement('div');
+  row.className = 'row';
+  row.innerHTML =
+    '<input class="input stat-num" style="max-width:120px" placeholder="např. 90\'" value="' + ea(num) + '">' +
+    '<input class="input stat-lbl" placeholder="Popis statistiky" value="' + ea(lbl) + '">';
+  container.appendChild(row);
+}
+
+// --- ROSTER ROWS ---
+function addRosterRow(role, desc) {
+  role = role || ''; desc = desc || '';
+  const container = document.getElementById('roster-container');
+  const row = document.createElement('div');
+  row.className = 'row';
+  row.innerHTML =
+    '<input class="input role-input" style="max-width:160px" placeholder="Role (Zpěv…)" value="' + ea(role) + '">' +
+    '<input class="input desc-input" placeholder="Stručný popis" value="' + ea(desc) + '">' +
+    '<button class="btn-remove" title="Odebrat" onclick="this.closest(\'.row\').remove()">×</button>';
+  container.appendChild(row);
+}
+
+// --- SETLIST ROWS ---
+function addSetlistRow(title) {
+  title = title || '';
+  const container = document.getElementById('setlist-container');
+  const row = document.createElement('div');
+  row.className = 'row';
+  row.innerHTML =
+    '<span class="row-num">??</span>' +
+    '<input class="input title-input" placeholder="Název písně" value="' + ea(title) + '">' +
+    '<button class="btn-remove" title="Odebrat" onclick="removeSetlistRow(this)">×</button>';
+  container.appendChild(row);
+  updateSetlistNumbers();
+}
+
+function removeSetlistRow(btn) {
+  btn.closest('.row').remove();
+  updateSetlistNumbers();
+}
+
+function updateSetlistNumbers() {
+  document.querySelectorAll('#setlist-container .row').forEach(function (row, i) {
+    var span = row.querySelector('.row-num');
+    if (span) span.textContent = String(i + 1).padStart(2, '0');
+  });
+}
+
+// --- GIG ROWS ---
+function addGigRow(date, venue, city, ticketHref) {
+  date = date || ''; venue = venue || ''; city = city || ''; ticketHref = ticketHref || '';
+  var container = document.getElementById('gigs-container');
+  var row = document.createElement('div');
+  row.className = 'gig-row-admin';
+  row.innerHTML =
+    '<input class="input gig-date-input" type="date" value="' + ea(date) + '">' +
+    '<input class="input gig-city-input" placeholder="Obec" value="' + ea(city) + '">' +
+    '<input class="input gig-venue-input" placeholder="Název akce (volitelné)" value="' + ea(venue) + '">' +
+    '<button class="btn-remove" title="Odebrat" onclick="this.closest(\'.gig-row-admin\').remove()">×</button>' +
+    '<input class="input gig-ticket-input" placeholder="Odkaz na akci — URL (volitelné)" value="' + ea(ticketHref) + '" style="grid-column:1/4; margin-top:-4px;">';
+  container.appendChild(row);
+}
+
+// --- COLLECT & SAVE ---
+function collectData() {
+  var stats = [];
+  document.querySelectorAll('#stats-container .row').forEach(function (row) {
+    stats.push({
+      num: row.querySelector('.stat-num').value.trim(),
+      lbl: row.querySelector('.stat-lbl').value.trim()
+    });
+  });
+
+  var roster = [];
+  document.querySelectorAll('#roster-container .row').forEach(function (row) {
+    var role = row.querySelector('.role-input').value.trim();
+    var desc = row.querySelector('.desc-input').value.trim();
+    if (role || desc) roster.push({ role: role, desc: desc });
+  });
+
+  var setlist = [];
+  document.querySelectorAll('#setlist-container .row').forEach(function (row, i) {
+    var title = row.querySelector('.title-input').value.trim();
+    if (title) setlist.push({ num: String(i + 1).padStart(2, '0'), title: title });
+  });
+
+  var gigs = [];
+  document.querySelectorAll('#gigs-container .gig-row-admin').forEach(function (row) {
+    var date = row.querySelector('.gig-date-input').value.trim();
+    var venue = row.querySelector('.gig-venue-input').value.trim();
+    var city = row.querySelector('.gig-city-input').value.trim();
+    var ticketHref = row.querySelector('.gig-ticket-input').value.trim();
+    if (date || venue) gigs.push({ date: date, venue: venue, city: city, ticketHref: ticketHref });
+  });
+  gigs.sort(function (a, b) { return a.date < b.date ? -1 : 1; });
+
+  return {
+    stats: stats,
+    roster: roster,
+    setlist: setlist,
+    gigs: gigs,
+    showInfo: {
+      duration: document.getElementById('show-duration').value.trim(),
+      format: document.getElementById('show-format').value.trim()
+    },
+    contact: {
+      bookingLabel: document.getElementById('booking-label').value.trim(),
+      bookingHref: document.getElementById('booking-href').value.trim(),
+      emailLabel: document.getElementById('email-label').value.trim(),
+      emailHref: document.getElementById('email-href').value.trim(),
+      phoneLabel: document.getElementById('phone-label').value.trim(),
+      phoneHref: document.getElementById('phone-href').value.trim(),
+      facebookHref: document.getElementById('facebook-href').value.trim(),
+      instagramHref: document.getElementById('instagram-href').value.trim(),
+      youtubeHref: document.getElementById('youtube-href').value.trim()
+    }
+  };
+}
+
+async function saveContent() {
+  var btn = document.getElementById('save-btn');
+  var statusEl = document.getElementById('save-status');
+  btn.disabled = true;
+  statusEl.textContent = 'Ukládám…';
+  statusEl.className = 'save-status';
+
+  try {
+    var res = await fetch('/api/content', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Admin-Password': currentPassword
+      },
+      body: JSON.stringify(collectData())
+    });
+
+    if (res.status === 401) {
+      statusEl.textContent = '✗ Nesprávné heslo';
+      statusEl.className = 'save-status error';
+      logout();
+    } else if (res.ok) {
+      statusEl.textContent = '✓ Uloženo';
+      statusEl.className = 'save-status success';
+      setTimeout(function () { statusEl.textContent = ''; }, 3000);
+    } else {
+      var err = await res.json();
+      statusEl.textContent = '✗ ' + (err.error || 'Chyba serveru');
+      statusEl.className = 'save-status error';
+    }
+  } catch {
+    statusEl.textContent = '✗ Síťová chyba';
+    statusEl.className = 'save-status error';
+  } finally {
+    btn.disabled = false;
+  }
+}
+
+// Escape for HTML attribute values
+function ea(s) {
+  return String(s || '').replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+</script>
+</body>
+</html>

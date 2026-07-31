@@ -1,0 +1,200 @@
+{
+  "stats": [
+    {
+      "num": "90'",
+      "lbl": "min. délka show"
+    },
+    {
+      "num": "100K+",
+      "lbl": "zhlédnutí reelu"
+    },
+    {
+      "num": "5",
+      "lbl": "členů na pódiu"
+    }
+  ],
+  "roster": [
+    {
+      "role": "Zpěv",
+      "desc": "Frontman party, drží mikrofon i publikum v jedné ruce."
+    },
+    {
+      "role": "Kytara",
+      "desc": "Riffy, které znáte zpaměti, přesně tak, jak mají znít."
+    },
+    {
+      "role": "Baskytara",
+      "desc": "Základ, na kterém stojí každá správná punkrocková show."
+    },
+    {
+      "role": "Bicí",
+      "desc": "Tempo, které nedovolí publiku vystřízlivět."
+    },
+    {
+      "role": "Kytara",
+      "desc": ""
+    }
+  ],
+  "setlist": [
+    { "num": "01", "title": "Zfetovanej" },
+    { "num": "02", "title": "Volání krve" },
+    { "num": "03", "title": "Balada o tom jak si chlapec pod vlivem měkké drogy našel děvče s nízkým IQ" },
+    { "num": "04", "title": "Dětský hřiště" },
+    { "num": "05", "title": "Až tady jednou nebudu" },
+    { "num": "06", "title": "Pověste ho vejš" },
+    { "num": "07", "title": "Tak mi zavolej" },
+    { "num": "08", "title": "Proč pocit mám" },
+    { "num": "09", "title": "Tráva" },
+    { "num": "10", "title": "Abstinent" },
+    { "num": "11", "title": "Smutku dávám sbohem" },
+    { "num": "12", "title": "Malá nevěrná holka" },
+    { "num": "13", "title": "Z Cuby kiwi" },
+    { "num": "14", "title": "Možná" },
+    { "num": "15", "title": "Strážní andělé" },
+    { "num": "16", "title": "Kulisácká" },
+    { "num": "17", "title": "Na Prodej" },
+    { "num": "18", "title": "Svařák" },
+    { "num": "19", "title": "Nejsem zklamanej" },
+    { "num": "20", "title": "Přirození" },
+    { "num": "21", "title": "Brikety" },
+    { "num": "22", "title": "Jsou chvíle" },
+    { "num": "23", "title": "Můžeš mít" }
+  ],
+  "gigs": [
+    {
+      "date": "2026-05-16",
+      "venue": "",
+      "city": "Hořovičky",
+      "ticketHref": ""
+    },
+    {
+      "date": "2026-05-30",
+      "venue": "",
+      "city": "Chropyně",
+      "ticketHref": ""
+    },
+    {
+      "date": "2026-06-06",
+      "venue": "",
+      "city": "Sobáčov u Litovle",
+      "ticketHref": ""
+    },
+    {
+      "date": "2026-06-12",
+      "venue": "Soukromá akce",
+      "city": "",
+      "ticketHref": ""
+    },
+    {
+      "date": "2026-06-12",
+      "venue": "Zámecký park",
+      "city": "Konice",
+      "ticketHref": ""
+    },
+    {
+      "date": "2026-06-13",
+      "venue": "Hanácké Benátky",
+      "city": "Litovel",
+      "ticketHref": ""
+    },
+    {
+      "date": "2026-06-19",
+      "venue": "Náměstí",
+      "city": "Česká Třebová",
+      "ticketHref": ""
+    },
+    {
+      "date": "2026-06-20",
+      "venue": "",
+      "city": "Mosty u Jindřichova Hradce",
+      "ticketHref": ""
+    },
+    {
+      "date": "2026-06-27",
+      "venue": "",
+      "city": "Slatinky",
+      "ticketHref": ""
+    },
+    {
+      "date": "2026-07-04",
+      "venue": "120 let SDH Nevřeň",
+      "city": "Nevřeň u Plzně",
+      "ticketHref": ""
+    },
+    {
+      "date": "2026-07-16",
+      "venue": "U Zámku",
+      "city": "Zábřeh na Moravě",
+      "ticketHref": ""
+    },
+    {
+      "date": "2026-07-18",
+      "venue": "",
+      "city": "Trhové Sviny",
+      "ticketHref": ""
+    },
+    {
+      "date": "2026-08-01",
+      "venue": "Výročí obce 800 let",
+      "city": "Herálec u Havl. Brodu",
+      "ticketHref": "https://www.facebook.com/photo/?fbid=1373739678194626&set=a.383310537237550&locale=cs_CZ"
+    },
+    {
+      "date": "2026-08-15",
+      "venue": "",
+      "city": "Sulejovice",
+      "ticketHref": ""
+    },
+    {
+      "date": "2026-08-29",
+      "venue": "",
+      "city": "Krchleby u Nymburka",
+      "ticketHref": ""
+    },
+    {
+      "date": "2026-08-29",
+      "venue": "Fotbalové hřiště",
+      "city": "Němčice u Kolína",
+      "ticketHref": ""
+    },
+    {
+      "date": "2026-09-12",
+      "venue": "Revival fest",
+      "city": "Heřmanova Huť",
+      "ticketHref": ""
+    },
+    {
+      "date": "2026-09-18",
+      "venue": "Tržnice — Tradiční olomoucká pouť",
+      "city": "Olomouc",
+      "ticketHref": ""
+    },
+    {
+      "date": "2026-09-19",
+      "venue": "Soukromá akce",
+      "city": "Vyškov",
+      "ticketHref": ""
+    },
+    {
+      "date": "2026-10-23",
+      "venue": "",
+      "city": "Žiželice nad Cidlinou",
+      "ticketHref": ""
+    }
+  ],
+  "showInfo": {
+    "duration": "až 90 min",
+    "format": "sólo i vedle dalších kapel"
+  },
+  "contact": {
+    "bookingLabel": "Drát Production — booking dotaz",
+    "bookingHref": "#",
+    "emailLabel": "E-mail",
+    "emailHref": "#",
+    "phoneLabel": "Telefon",
+    "phoneHref": "#",
+    "facebookHref": "https://www.facebook.com/profile.php?id=100066758199767&locale=cs_CZ",
+    "instagramHref": "https://www.instagram.com/harlejrevivalolomouc/",
+    "youtubeHref": "https://www.youtube.com/@harlejrevivalolomouc393"
+  }
+}

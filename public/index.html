@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Harlej Revival Olomouc</title>
+<link rel="icon" type="image/webp" href="/img/favicon.webp">
+
+<!-- Až budeš znát doménu, nahraď SITEURL níže (2× og:url a og:image) -->
+<meta name="description" content="Jediná revivalová skupina Harlej v ČR. Pět pohodářů z Olomouce hrají to nejlepší z Harleje s energií a úctou k originálu. Booking a termíny vystoupení.">
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="cs_CZ">
+<meta property="og:site_name" content="Harlej Revival Olomouc">
+<meta property="og:title" content="Harlej Revival Olomouc — Jediná revivalová skupina Harlej v ČR">
+<meta property="og:description" content="Pět pohodářů z Olomouce hrají to nejlepší z Harleje s energií, náloží a upřímnou úctou k originálu. Podívejte se na termíny vystoupení nebo nás poptat na booking.">
+<meta property="og:url" content="https://SITEURL/">
+<meta property="og:image" content="https://SITEURL/img/hero.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Harlej Revival Olomouc — pět členů kapely">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Harlej Revival Olomouc">
+<meta name="twitter:description" content="Jediná revivalová skupina Harlej v ČR. Termíny vystoupení a booking.">
+<meta name="twitter:image" content="https://SITEURL/img/hero.jpg">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MusicGroup",
+  "name": "Harlej Revival Olomouc",
+  "alternateName": "Harlej Revival",
+  "description": "Jediná revivalová skupina Harlej v ČR. Pět pohodářů z Olomouce hraje to nejlepší z Harleje s energií, náloží a upřímnou úctou k originálu.",
+  "url": "https://SITEURL/",
+  "image": "https://SITEURL/img/hero.jpg",
+  "logo": "https://SITEURL/img/favicon.webp",
+  "genre": ["Rock", "Punk rock", "Revival"],
+  "foundingDate": "2020",
+  "foundingLocation": {
+    "@type": "Place",
+    "name": "Olomouc",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Olomouc",
+      "addressCountry": "CZ"
+    }
+  },
+  "areaServed": {
+    "@type": "Country",
+    "name": "Česká republika"
+  },
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "contactType": "booking"
+  }
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Oswald:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#161210;
+    --paper:#EDE6D6;
+    --paper-dim:#DCD3BD;
+    --amber:#E8A33D;
+    --rust:#C0392B;
+    --denim:#3C4A5C;
+    --line: rgba(237,230,214,0.16);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--ink);
+    color:var(--paper);
+    font-family:'Oswald', sans-serif;
+    font-weight:400;
+    overflow-x:hidden;
+  }
+  h1,h2,h3{
+    font-family:'Anton', sans-serif;
+    font-weight:400;
+    letter-spacing:0.5px;
+    margin:0;
+    text-transform:uppercase;
+  }
+  .mono{
+    font-family:'Space Mono', monospace;
+  }
+  a{color:inherit;}
+  .wrap{
+    max-width:1120px;
+    margin:0 auto;
+    padding:0 28px;
+  }
+
+  /* ---------- NAV ---------- */
+  nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(22,18,16,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  nav .wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    height:64px;
+  }
+  .brand{
+    font-family:'Anton', sans-serif;
+    font-size:1.15rem;
+    letter-spacing:1px;
+  }
+  .brand span{color:var(--amber);}
+  .navlinks{
+    display:flex; gap:28px;
+    list-style:none; margin:0; padding:0;
+    font-size:0.82rem;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+  }
+  .navlinks a{
+    text-decoration:none;
+    color:var(--paper-dim);
+    border-bottom:2px solid transparent;
+    padding-bottom:4px;
+    transition:color .2s, border-color .2s;
+  }
+  .navlinks a:hover, .navlinks a:focus-visible{color:var(--amber); border-color:var(--amber);}
+  .navcta{
+    display:none;
+  }
+  @media(min-width:720px){
+    .navcta{
+      display:inline-block;
+      background:var(--rust);
+      color:var(--paper);
+      font-family:'Space Mono',monospace;
+      font-size:0.78rem;
+      letter-spacing:1px;
+      text-decoration:none;
+      padding:9px 16px;
+      text-transform:uppercase;
+    }
+  }
+  .navlinks{display:none;}
+  @media(min-width:840px){ .navlinks{display:flex;} }
+
+  /* ---------- HAMBURGER ---------- */
+  .hamburger{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    gap:5px;
+    width:40px; height:40px;
+    background:none;
+    border:none;
+    cursor:pointer;
+    padding:8px;
+    flex-shrink:0;
+  }
+  .hamburger span{
+    display:block;
+    height:2px;
+    background:var(--paper);
+    border-radius:1px;
+    transition:transform .25s ease, opacity .2s ease, width .2s ease;
+    transform-origin:center;
+  }
+  .hamburger span:nth-child(1){ width:22px; }
+  .hamburger span:nth-child(2){ width:16px; }
+  .hamburger span:nth-child(3){ width:22px; }
+  .hamburger[aria-expanded="true"] span:nth-child(1){
+    transform:translateY(7px) rotate(45deg); width:22px;
+  }
+  .hamburger[aria-expanded="true"] span:nth-child(2){
+    opacity:0; transform:scaleX(0);
+  }
+  .hamburger[aria-expanded="true"] span:nth-child(3){
+    transform:translateY(-7px) rotate(-45deg); width:22px;
+  }
+  @media(min-width:840px){ .hamburger{display:none;} }
+
+  .mobile-menu{
+    display:none;
+    position:absolute;
+    top:64px; left:0; right:0;
+    background:rgba(22,18,16,0.98);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+    padding:0;
+    overflow:hidden;
+    max-height:0;
+    transition:max-height .3s ease, padding .3s ease;
+  }
+  .mobile-menu.is-open{
+    display:block;
+    max-height:320px;
+    padding:8px 0 20px;
+  }
+  @media(min-width:840px){ .mobile-menu{display:none !important;} }
+  .mobile-menu ul{
+    list-style:none; margin:0; padding:0;
+  }
+  .mobile-menu ul li a{
+    display:block;
+    padding:14px 28px;
+    font-family:'Space Mono', monospace;
+    font-size:0.82rem;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    text-decoration:none;
+    color:var(--paper-dim);
+    border-bottom:1px solid var(--line);
+    transition:color .15s, background .15s;
+  }
+  .mobile-menu ul li a:hover, .mobile-menu ul li a:focus-visible{
+    color:var(--amber);
+    background:rgba(237,230,214,0.04);
+  }
+  .mobile-menu .mob-cta{
+    display:block;
+    margin:16px 28px 0;
+    background:var(--rust);
+    color:var(--paper);
+    font-family:'Space Mono',monospace;
+    font-size:0.78rem;
+    letter-spacing:1px;
+    text-decoration:none;
+    padding:12px 16px;
+    text-transform:uppercase;
+    text-align:center;
+  }
+
+  /* ---------- HERO ---------- */
+  header.hero{
+    position:relative;
+    padding:96px 0 140px;
+    background:
+      radial-gradient(ellipse 900px 500px at 18% -10%, rgba(232,163,61,0.20), transparent 60%),
+      radial-gradient(ellipse 700px 500px at 100% 10%, rgba(192,57,43,0.18), transparent 55%),
+      var(--ink);
+    border-bottom:1px solid var(--line);
+  }
+  .hero-inner{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:48px;
+    align-items:center;
+  }
+  @media(min-width:900px){
+    .hero-inner{grid-template-columns:1fr 420px;}
+  }
+  .hero-photo{
+    position:relative;
+    flex-shrink:0;
+  }
+  .hero-photo img{
+    width:100%;
+    display:block;
+    border:1px solid var(--line);
+    filter:grayscale(18%) contrast(1.05);
+  }
+  .hero-photo::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(160deg, rgba(232,163,61,0.12) 0%, transparent 50%, rgba(192,57,43,0.10) 100%);
+    pointer-events:none;
+  }
+  .eyebrow{
+    font-family:'Space Mono', monospace;
+    font-size:0.78rem;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    color:var(--amber);
+    display:flex; align-items:center; gap:10px;
+    margin-bottom:22px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:26px; height:1px; background:var(--amber);
+  }
+  h1.title{
+    font-size:clamp(3.2rem, 9vw, 6.4rem);
+    line-height:0.92;
+    color:var(--paper);
+  }
+  h1.title .accent{color:var(--rust); -webkit-text-stroke:1.5px var(--paper); text-stroke:1.5px var(--paper);}
+  .subhead{
+    max-width:520px;
+    font-size:1.08rem;
+    line-height:1.6;
+    color:var(--paper-dim);
+    margin:26px 0 38px;
+  }
+  .cta-row{display:flex; flex-wrap:wrap; gap:14px;}
+  .btn{
+    font-family:'Space Mono', monospace;
+    font-size:0.85rem;
+    letter-spacing:0.5px;
+    text-transform:uppercase;
+    text-decoration:none;
+    padding:14px 24px;
+    display:inline-block;
+    border:1px solid var(--paper);
+    transition:transform .15s ease, background .15s ease, color .15s ease;
+  }
+  .btn-solid{background:var(--rust); border-color:var(--rust); color:var(--paper);}
+  .btn-solid:hover{transform:translateY(-2px); background:#a5301f;}
+  .btn-ghost{color:var(--paper); background:transparent;}
+  .btn-ghost:hover{transform:translateY(-2px); background:rgba(237,230,214,0.08);}
+
+  .stat-strip{
+    margin-top:64px;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+  }
+  .stat{
+    padding:22px 4px;
+    text-align:center;
+    border-right:1px solid var(--line);
+  }
+  .stat:last-child{border-right:none;}
+  .stat .num{
+    font-family:'Anton', sans-serif;
+    font-size:2.1rem;
+    color:var(--amber);
+  }
+  .stat .lbl{
+    font-family:'Space Mono', monospace;
+    font-size:0.68rem;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    color:var(--paper-dim);
+    margin-top:4px;
+  }
+
+  /* torn edge */
+  .torn{
+    position:relative;
+    height:34px;
+    width:100%;
+    background:var(--ink);
+    -webkit-mask-image: linear-gradient(115deg, transparent 49%, black 51%), linear-gradient(245deg, transparent 49%, black 51%);
+    -webkit-mask-size:24px 34px;
+    -webkit-mask-repeat:repeat-x;
+    mask-image: linear-gradient(115deg, transparent 49%, black 51%), linear-gradient(245deg, transparent 49%, black 51%);
+    mask-size:24px 34px;
+    mask-repeat:repeat-x;
+  }
+  .torn.flip{transform:rotate(180deg);}
+  .section-paper{
+    background:var(--paper);
+    color:var(--ink);
+  }
+  .section-paper .torn{background:var(--paper);}
+
+  /* ---------- SECTION GENERIC ---------- */
+  section{padding:88px 0;}
+  .kicker{
+    font-family:'Space Mono', monospace;
+    font-size:0.75rem;
+    letter-spacing:2.5px;
+    text-transform:uppercase;
+    color:var(--rust);
+    margin-bottom:14px;
+  }
+  h2.h2{
+    font-size:clamp(2.1rem, 5vw, 3.2rem);
+    margin-bottom:28px;
+  }
+  .lede{
+    max-width:640px;
+    font-size:1.05rem;
+    line-height:1.7;
+    color:var(--paper-dim);
+  }
+  .section-paper .lede{color:#4a4038;}
+
+  /* ---------- O KAPELE ---------- */
+  .about-grid{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:40px;
+    margin-top:46px;
+  }
+  @media(min-width:800px){ .about-grid{grid-template-columns:1.1fr 0.9fr;} }
+  .roster{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+  }
+  .roster div{
+    background:var(--ink);
+    padding:18px 16px;
+  }
+  .roster .role{
+    font-family:'Space Mono', monospace;
+    font-size:0.72rem;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    color:var(--amber);
+  }
+  .roster .desc{
+    font-size:0.92rem;
+    color:var(--paper-dim);
+    margin-top:6px;
+    line-height:1.5;
+  }
+
+  /* ---------- VIDEO / UKAZKY ---------- */
+  .section-paper h2.h2, .section-paper .kicker{color:var(--ink);}
+  .section-paper .kicker{color:var(--rust);}
+  .reels{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(200px,1fr));
+    gap:22px;
+    margin-top:44px;
+  }
+  .reel-card{
+    background:var(--ink);
+    color:var(--paper);
+    aspect-ratio:9/13;
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-end;
+    padding:18px;
+    overflow:hidden;
+    border:1px solid rgba(0,0,0,0.2);
+  }
+  .reel-card::before{
+    content:"";
+    position:absolute; inset:0;
+    background:linear-gradient(200deg, rgba(232,163,61,0.35), rgba(192,57,43,0.25) 55%, rgba(22,18,16,0.9));
+  }
+  .reel-card .play{
+    position:absolute; top:16px; right:16px;
+    width:34px; height:34px;
+    border:1px solid rgba(237,230,214,0.6);
+    border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-size:0.7rem;
+    z-index:2;
+  }
+  .reel-card .views{
+    font-family:'Anton', sans-serif;
+    font-size:1.6rem;
+    z-index:2;
+    color:var(--paper);
+  }
+  .reel-card .caption{
+    font-family:'Space Mono', monospace;
+    font-size:0.72rem;
+    letter-spacing:0.5px;
+    color:var(--paper-dim);
+    z-index:2;
+    margin-top:4px;
+  }
+
+  /* ---------- SETLIST TICKET ---------- */
+  .ticket{
+    margin-top:48px;
+    background:var(--ink);
+    border:1px dashed rgba(237,230,214,0.35);
+    position:relative;
+    display:grid;
+    grid-template-columns:1fr;
+    max-width:640px;
+  }
+  @media(min-width:640px){ .ticket{grid-template-columns:1fr 190px;} }
+  .ticket::before, .ticket::after{
+    content:"";
+    position:absolute;
+    width:26px; height:26px;
+    background:var(--paper);
+    border-radius:50%;
+    top:50%; transform:translateY(-50%);
+  }
+  .ticket::before{left:-13px;}
+  .ticket::after{right:-13px;}
+  @media(max-width:639px){ .ticket::before, .ticket::after{display:none;} }
+  .ticket-main{padding:28px 30px;}
+  .ticket-main .kicker{margin-bottom:10px;}
+  .setlist{
+    list-style:none; margin:16px 0 0; padding:0;
+    columns:2; column-gap:26px;
+    font-family:'Space Mono', monospace;
+    font-size:0.85rem;
+  }
+  .setlist li{
+    padding:7px 0;
+    border-bottom:1px solid var(--line);
+    break-inside:avoid;
+    color:var(--paper-dim);
+  }
+  .setlist li b{color:var(--paper); font-weight:400;}
+  .ticket-stub{
+    border-top:1px dashed rgba(237,230,214,0.35);
+    padding:22px 24px;
+    display:flex; flex-direction:column; justify-content:center;
+    gap:6px;
+  }
+  @media(min-width:640px){
+    .ticket-stub{border-top:none; border-left:1px dashed rgba(237,230,214,0.35);}
+  }
+  .ticket-stub .lbl{font-family:'Space Mono',monospace; font-size:0.68rem; letter-spacing:1px; color:var(--amber); text-transform:uppercase;}
+  .ticket-stub .val{font-family:'Anton', sans-serif; font-size:1.3rem;}
+
+  /* ---------- TERMÍNY ---------- */
+  .gigs-list{
+    margin-top:44px;
+    border-top:1px solid var(--line);
+  }
+  .gig-row{
+    display:grid;
+    grid-template-columns:110px 1fr auto;
+    align-items:center;
+    gap:16px;
+    padding:18px 0;
+    border-bottom:1px solid var(--line);
+  }
+  @media(min-width:600px){
+    .gig-row{grid-template-columns:130px 1fr auto;}
+  }
+  .gig-date{
+    font-family:'Space Mono', monospace;
+    font-size:0.8rem;
+    color:var(--amber);
+    letter-spacing:0.5px;
+    white-space:nowrap;
+  }
+  .gig-info{ display:flex; flex-direction:column; gap:3px; }
+  .gig-city{
+    font-family:'Oswald', sans-serif;
+    font-size:1.1rem;
+    color:var(--paper);
+  }
+  .gig-venue{
+    font-family:'Space Mono', monospace;
+    font-size:0.72rem;
+    color:var(--paper-dim);
+  }
+  .gig-ticket{
+    font-family:'Space Mono', monospace;
+    font-size:0.75rem;
+    letter-spacing:0.5px;
+    text-transform:uppercase;
+    text-decoration:none;
+    color:var(--paper);
+    border:1px solid var(--line);
+    padding:7px 12px;
+    white-space:nowrap;
+    transition:border-color .15s, color .15s;
+  }
+  .gig-ticket:hover{border-color:var(--amber); color:var(--amber);}
+  .gigs-empty{
+    padding:32px 0;
+    font-family:'Space Mono', monospace;
+    font-size:0.85rem;
+    color:var(--paper-dim);
+  }
+
+  /* ---------- REFERENCE ---------- */
+  .ref-row{
+    display:flex; flex-wrap:wrap; gap:14px 34px;
+    margin-top:40px;
+    font-family:'Space Mono', monospace;
+    font-size:0.9rem;
+    color:#4a4038;
+  }
+  .ref-row span{
+    padding-bottom:4px;
+    border-bottom:2px solid var(--rust);
+  }
+
+  /* ---------- CENIK ---------- */
+  .price-grid{
+    margin-top:46px;
+    display:grid;
+    grid-template-columns:1fr;
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+  }
+  @media(min-width:760px){ .price-grid{grid-template-columns:1.3fr 1fr 1fr;} }
+  .price-cell{
+    background:var(--ink);
+    padding:30px 26px;
+  }
+  .price-cell.feat{background:#1d1815;}
+  .price-cell .lbl2{
+    font-family:'Space Mono', monospace;
+    font-size:0.72rem;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    color:var(--amber);
+    margin-bottom:10px;
+  }
+  .price-cell .big{
+    font-family:'Anton', sans-serif;
+    font-size:2.2rem;
+    line-height:1.05;
+  }
+  .price-cell .fine{
+    margin-top:12px;
+    font-size:0.88rem;
+    color:var(--paper-dim);
+    line-height:1.55;
+  }
+
+  /* ---------- KONTAKT ---------- */
+  footer{
+    background:var(--ink);
+    border-top:1px solid var(--line);
+    padding:70px 0 40px;
+  }
+  .contact-grid{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:40px;
+  }
+  @media(min-width:800px){ .contact-grid{grid-template-columns:1fr 1fr;} }
+  .contact-block .lbl3{
+    font-family:'Space Mono', monospace;
+    font-size:0.7rem;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    color:var(--amber);
+    margin-bottom:10px;
+  }
+  .contact-block a.line{
+    display:block;
+    text-decoration:none;
+    font-size:1.05rem;
+    padding:10px 0;
+    border-bottom:1px solid var(--line);
+    color:var(--paper);
+  }
+  .contact-block a.line:hover{color:var(--amber);}
+  .foot-bottom{
+    margin-top:60px;
+    padding-top:24px;
+    border-top:1px solid var(--line);
+    display:flex; flex-wrap:wrap; justify-content:space-between; gap:10px;
+    font-family:'Space Mono', monospace;
+    font-size:0.72rem;
+    color:var(--paper-dim);
+    letter-spacing:0.5px;
+  }
+
+  /* ---------- SCROLL REVEAL ---------- */
+  .reveal{
+    opacity:0;
+    transform:translateY(28px);
+    transition:opacity .55s ease, transform .55s ease;
+    transition-delay:var(--reveal-delay, 0ms);
+  }
+  .reveal.in-view{
+    opacity:1;
+    transform:none;
+  }
+
+  ::selection{background:var(--rust); color:var(--paper);}
+  :focus-visible{outline:2px solid var(--amber); outline-offset:2px;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{transition:none !important;}
+    .reveal{opacity:1; transform:none;}
+  }
+</style>
+</head>
+<body>
+
+<nav id="main-nav">
+  <div class="wrap">
+    <div class="brand">HARLEJ <span>REVIVAL</span> OLOMOUC</div>
+    <ul class="navlinks">
+      <li><a href="#o-kapele">O kapele</a></li>
+      <li><a href="#ukazky">Ukázky</a></li>
+      <li><a href="#repertoar">Repertoár</a></li>
+      <li><a href="#terminy">Termíny</a></li>
+      <li><a href="#kontakt">Kontakt</a></li>
+    </ul>
+    <a class="navcta" href="#kontakt">Poptat termín</a>
+    <button class="hamburger" aria-label="Otevřít menu" aria-expanded="false" aria-controls="mobile-menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobile-menu" role="navigation" aria-label="Mobilní navigace">
+    <ul>
+      <li><a href="#o-kapele">O kapele</a></li>
+      <li><a href="#ukazky">Ukázky</a></li>
+      <li><a href="#repertoar">Repertoár</a></li>
+      <li><a href="#terminy">Termíny</a></li>
+      <li><a href="#kontakt">Kontakt</a></li>
+    </ul>
+    <a class="mob-cta" href="#kontakt">Poptat termín</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-inner">
+      <div class="hero-text">
+        <div class="eyebrow">jediná revivalová skupina harlej v čr</div>
+        <h1 class="title">PĚT CHLAPŮ.<br>JEDNA <span class="accent">PARTA.</span><br>VŠECHNY PECKY.</h1>
+        <p class="subhead">Hrajeme to nejlepší z Harleje s energií, náloží a upřímnou úctou k originálu — a mezi songy vám prozradíme i pár věcí, co jste o kapele možná nevěděli.</p>
+        <div class="cta-row">
+          <a class="btn btn-solid" href="#kontakt">Poptat vystoupení</a>
+          <a class="btn btn-ghost" href="#ukazky">Ukázky z akcí</a>
+        </div>
+      </div>
+      <div class="hero-photo reveal">
+        <img src="/img/hero.jpg" alt="Harlej Revival Olomouc — pět členů kapely" loading="eager">
+      </div>
+    </div>
+
+    <div class="stat-strip reveal" style="--reveal-delay:200ms" id="stat-strip"></div>
+  </div>
+</header>
+<div class="torn"></div>
+
+<section class="section-paper" id="o-kapele">
+  <div class="wrap">
+    <div class="kicker reveal">o kapele</div>
+    <h2 class="h2 reveal" style="--reveal-delay:80ms">Pět pohodářů,<br>co to nehrajou na půl plynu.</h2>
+    <p class="lede reveal" style="--reveal-delay:160ms">Máte rádi Harlej? My taky — a to natolik, že jsme se rozhodli založit jejich revival. Na pódiu si dáváme záležet nejen na muzice, ale i na show: pár kostýmních narážek, historky o originální kapele a energie, která nedovolí nikomu jen tak postávat u piva.</p>
+
+    <div class="about-grid reveal" style="--reveal-delay:240ms">
+      <div>
+        <div class="roster" id="roster"></div>
+      </div>
+      <div>
+        <div class="ref-row" style="margin-top:0;">
+          <span>Festivaly</span>
+          <span>Městské slavnosti</span>
+          <span>Předvánoční programy</span>
+          <span>Plesy a oslavy</span>
+        </div>
+        <p class="lede" style="margin-top:22px;">Vystupujeme po celé ČR — od menších náměstí po revival festivaly s dalšími kapelami na pódiu.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="torn flip section-paper"></div>
+
+<section id="ukazky">
+  <div class="wrap">
+    <div class="kicker reveal">ukázky z akcí</div>
+    <h2 class="h2 reveal" style="--reveal-delay:80ms">Neradi mluvíme.<br>Radši to pustíme.</h2>
+    <p class="lede reveal" style="--reveal-delay:160ms">Krátké sestřihy přímo z koncertů — atmosféra, publikum a pár momentů, které se prostě musí vidět.</p>
+
+    <div class="reels reveal" style="--reveal-delay:240ms" id="reels">
+      <div class="reel-card reel-skeleton">
+        <div class="caption">Načítám videa z Facebooku…</div>
+      </div>
+    </div>
+    <p class="lede" id="reels-status" style="margin-top:18px; font-family:'Space Mono',monospace; font-size:0.8rem; display:none;"></p>
+  </div>
+</section>
+
+<script>
+(function () {
+  const container = document.getElementById('reels');
+  const status = document.getElementById('reels-status');
+
+  function formatDate(iso) {
+    if (!iso) return '';
+    try {
+      return new Date(iso).toLocaleDateString('cs-CZ', { day: 'numeric', month: 'long', year: 'numeric' });
+    } catch (e) { return ''; }
+  }
+
+  function renderVideos(videos) {
+    container.innerHTML = '';
+    if (!videos || videos.length === 0) {
+      container.innerHTML = '<div class="reel-card"><div class="caption">Zatím žádná videa k zobrazení.</div></div>';
+      return;
+    }
+    videos.forEach((v) => {
+      const card = document.createElement('a');
+      card.className = 'reel-card';
+      card.href = v.permalinkUrl || '#';
+      card.target = '_blank';
+      card.rel = 'noopener noreferrer';
+      card.style.textDecoration = 'none';
+      if (v.thumbnail) {
+        card.style.backgroundImage = `url('${v.thumbnail}')`;
+        card.style.backgroundSize = 'cover';
+        card.style.backgroundPosition = 'center';
+      }
+      card.innerHTML = `
+        <div class="play">&#9654;</div>
+        <div class="caption" style="font-size:0.85rem; color:var(--paper);">${v.title || 'Video z Facebooku'}</div>
+        <div class="caption">${formatDate(v.createdTime)}</div>
+      `;
+      container.appendChild(card);
+    });
+  }
+
+  fetch('/api/videos')
+    .then((r) => r.json())
+    .then((data) => {
+      renderVideos(data.videos);
+      if (data.error) {
+        status.style.display = 'block';
+        status.textContent = 'Poznámka: poslední pokus o načtení z Facebooku selhal, zobrazují se poslední známá videa.';
+      }
+    })
+    .catch(() => {
+      container.innerHTML = '<div class="reel-card"><div class="caption">Videa se teď nepodařilo načíst. Zkuste to prosím později.</div></div>';
+    });
+})();
+</script>
+
+<section class="section-paper" id="repertoar">
+  <div class="wrap">
+    <div class="kicker reveal">repertoár</div>
+    <h2 class="h2 reveal" style="--reveal-delay:80ms">Výběr z toho nejlepšího.</h2>
+    <p class="lede reveal" style="--reveal-delay:160ms">Program stavíme tak, aby gradoval — a přesně vygradoval k největším hitům.</p>
+
+    <div class="ticket reveal" style="--reveal-delay:260ms">
+      <div class="ticket-main">
+        <div class="kicker" style="color:var(--amber);">setlist &middot; ukázka</div>
+        <ul class="setlist" id="setlist"></ul>
+      </div>
+      <div class="ticket-stub" id="ticket-stub"></div>
+    </div>
+  </div>
+</section>
+<div class="torn flip section-paper"></div>
+
+<section id="terminy">
+  <div class="wrap">
+    <div class="kicker reveal">kde nás najdete</div>
+    <h2 class="h2 reveal" style="--reveal-delay:80ms">Nadcházející<br>vystoupení.</h2>
+    <p class="lede reveal" style="--reveal-delay:160ms">Přijďte si zazpívat naživo — sledujte termíny a rezervujte si místo včas.</p>
+    <div class="gigs-list reveal" style="--reveal-delay:260ms" id="gigs-list">
+      <div class="gigs-empty">Načítám termíny…</div>
+    </div>
+  </div>
+</section>
+
+<footer id="kontakt">
+  <div class="wrap">
+    <div class="kicker reveal">kontakt &amp; booking</div>
+    <h2 class="h2 reveal" style="--reveal-delay:80ms; margin-bottom:36px;">Máte termín?<br>Pojďme ho zaplnit.</h2>
+
+    <div class="contact-grid reveal" style="--reveal-delay:180ms">
+      <div class="contact-block" id="contact-booking"></div>
+      <div class="contact-block" id="contact-social"></div>
+    </div>
+
+    <div class="foot-bottom">
+      <span>&copy; Harlej Revival Olomouc</span>
+      <span>Jediná revivalová skupina Harlej v ČR</span>
+    </div>
+  </div>
+</footer>
+
+
+<script>
+(function () {
+  function esc(s) {
+    return String(s || '')
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+  function safeHref(h) {
+    if (!h || typeof h !== 'string') return '#';
+    var t = h.trim();
+    return /^(https?:|mailto:|tel:|\/|#)/.test(t) ? t : '#';
+  }
+
+  fetch('/api/content').then(function (r) { return r.json(); }).then(function (d) {
+    var ss = document.getElementById('stat-strip');
+    if (ss && d.stats) {
+      ss.innerHTML = d.stats.map(function (s) {
+        return '<div class="stat"><div class="num">' + esc(s.num) + '</div><div class="lbl">' + esc(s.lbl) + '</div></div>';
+      }).join('');
+    }
+
+    var ro = document.getElementById('roster');
+    if (ro && d.roster) {
+      ro.innerHTML = d.roster.map(function (m) {
+        return '<div><div class="role">' + esc(m.role) + '</div><div class="desc">' + esc(m.desc) + '</div></div>';
+      }).join('');
+    }
+
+    var sl = document.getElementById('setlist');
+    if (sl && d.setlist) {
+      sl.innerHTML = d.setlist.map(function (s) {
+        return '<li><b>' + esc(s.num) + '</b>  ' + esc(s.title) + '</li>';
+      }).join('');
+    }
+
+    var ts = document.getElementById('ticket-stub');
+    if (ts && d.showInfo) {
+      ts.innerHTML =
+        '<div class="lbl">Délka show</div>' +
+        '<div class="val">' + esc(d.showInfo.duration) + '</div>' +
+        '<div class="lbl" style="margin-top:14px;">Formát</div>' +
+        '<div class="val" style="font-size:1rem;">' + esc(d.showInfo.format) + '</div>';
+    }
+
+    var cb = document.getElementById('contact-booking');
+    if (cb && d.contact) {
+      var c = d.contact;
+      cb.innerHTML =
+        '<div class="lbl3">Booking</div>' +
+        '<a class="line" href="' + safeHref(c.bookingHref) + '">' + esc(c.bookingLabel) + ' →</a>' +
+        '<a class="line" href="' + safeHref(c.emailHref) + '">' + esc(c.emailLabel) + ' →</a>' +
+        '<a class="line" href="' + safeHref(c.phoneHref) + '">' + esc(c.phoneLabel) + ' →</a>';
+    }
+
+    var cs = document.getElementById('contact-social');
+    if (cs && d.contact) {
+      var c = d.contact;
+      cs.innerHTML =
+        '<div class="lbl3">Sociální sítě</div>' +
+        '<a class="line" href="' + safeHref(c.facebookHref) + '" target="_blank" rel="noopener noreferrer">Facebook →</a>' +
+        '<a class="line" href="' + safeHref(c.instagramHref) + '" target="_blank" rel="noopener noreferrer">Instagram →</a>' +
+        '<a class="line" href="' + safeHref(c.youtubeHref) + '" target="_blank" rel="noopener noreferrer">YouTube →</a>';
+    }
+
+    var gl = document.getElementById('gigs-list');
+    if (gl && d.gigs) {
+      var today = new Date().toISOString().slice(0, 10);
+      var upcoming = d.gigs.filter(function (g) { return g.date >= today; });
+      upcoming.sort(function (a, b) { return a.date < b.date ? -1 : 1; });
+      if (upcoming.length === 0) {
+        gl.innerHTML = '<div class="gigs-empty">Momentálně žádné plánované termíny — sledujte nás na sociálních sítích.</div>';
+      } else {
+        gl.innerHTML = upcoming.map(function (g) {
+          var d2 = new Date(g.date);
+          var dateStr = d2.toLocaleDateString('cs-CZ', { day: 'numeric', month: 'long', year: 'numeric' });
+          var ticket = g.ticketHref
+            ? '<a class="gig-ticket" href="' + safeHref(g.ticketHref) + '" target="_blank" rel="noopener noreferrer">Akce →</a>'
+            : '';
+          return '<div class="gig-row">' +
+            '<div class="gig-date">' + esc(dateStr) + '</div>' +
+            '<div class="gig-info">' +
+              '<div class="gig-city">' + esc(g.city || g.venue) + '</div>' +
+              (g.venue && g.city ? '<div class="gig-venue">' + esc(g.venue) + '</div>' : '') +
+            '</div>' +
+            ticket +
+            '</div>';
+        }).join('');
+      }
+    }
+    if (d.gigs && d.gigs.length) {
+      var today = new Date().toISOString().slice(0, 10);
+      var events = d.gigs
+        .filter(function (g) { return g.date >= today && g.venue; })
+        .map(function (g) {
+          var ev = {
+            '@context': 'https://schema.org',
+            '@type': 'MusicEvent',
+            'name': 'Harlej Revival Olomouc — ' + g.venue,
+            'startDate': g.date,
+            'location': {
+              '@type': 'Place',
+              'name': g.venue,
+              'address': {
+                '@type': 'PostalAddress',
+                'addressLocality': g.city || '',
+                'addressCountry': 'CZ'
+              }
+            },
+            'performer': {
+              '@type': 'MusicGroup',
+              'name': 'Harlej Revival Olomouc'
+            },
+            'eventStatus': 'https://schema.org/EventScheduled',
+            'eventAttendanceMode': 'https://schema.org/OfflineEventAttendanceMode'
+          };
+          if (g.ticketHref) ev['offers'] = { '@type': 'Offer', 'url': g.ticketHref };
+          return ev;
+        });
+      if (events.length) {
+        var el = document.createElement('script');
+        el.type = 'application/ld+json';
+        el.textContent = JSON.stringify(events.length === 1 ? events[0] : events);
+        document.head.appendChild(el);
+      }
+    }
+  }).catch(function () { /* obsah se nepodařilo načíst, sekce zůstanou prázdné */ });
+})();
+</script>
+<script>
+(function () {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in-view');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(function (el) {
+    observer.observe(el);
+  });
+})();
+</script>
+
+<script>
+(function () {
+  var btn = document.querySelector('.hamburger');
+  var menu = document.getElementById('mobile-menu');
+  if (!btn || !menu) return;
+
+  function openMenu() {
+    menu.classList.add('is-open');
+    btn.setAttribute('aria-expanded', 'true');
+    btn.setAttribute('aria-label', 'Zavřít menu');
+  }
+  function closeMenu() {
+    menu.classList.remove('is-open');
+    btn.setAttribute('aria-expanded', 'false');
+    btn.setAttribute('aria-label', 'Otevřít menu');
+  }
+
+  btn.addEventListener('click', function () {
+    menu.classList.contains('is-open') ? closeMenu() : openMenu();
+  });
+
+  menu.querySelectorAll('a').forEach(function (a) {
+    a.addEventListener('click', closeMenu);
+  });
+
+  document.addEventListener('click', function (e) {
+    if (!document.getElementById('main-nav').contains(e.target)) closeMenu();
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>404 — Harlej Revival Olomouc</title>
+<link rel="icon" type="image/webp" href="/img/favicon.webp">
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Oswald:wght@400;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#161210;
+    --paper:#EDE6D6;
+    --paper-dim:#DCD3BD;
+    --amber:#E8A33D;
+    --rust:#C0392B;
+    --line:rgba(237,230,214,0.16);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html,body{height:100%;}
+  body{
+    background:var(--ink);
+    color:var(--paper);
+    font-family:'Oswald', sans-serif;
+    display:flex;
+    flex-direction:column;
+    min-height:100vh;
+  }
+  nav{
+    border-bottom:1px solid var(--line);
+    padding:0 28px;
+    height:64px;
+    display:flex;
+    align-items:center;
+  }
+  .brand{
+    font-family:'Anton', sans-serif;
+    font-size:1.15rem;
+    letter-spacing:1px;
+    text-decoration:none;
+    color:var(--paper);
+  }
+  .brand span{color:var(--amber);}
+  main{
+    flex:1;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:60px 28px;
+    background:
+      radial-gradient(ellipse 700px 500px at 10% 0%, rgba(232,163,61,0.15), transparent 60%),
+      radial-gradient(ellipse 600px 400px at 90% 80%, rgba(192,57,43,0.12), transparent 55%),
+      var(--ink);
+  }
+  .content{
+    max-width:560px;
+    text-align:center;
+  }
+  .code{
+    font-family:'Anton', sans-serif;
+    font-size:clamp(5rem, 20vw, 9rem);
+    line-height:1;
+    color:var(--amber);
+    letter-spacing:-2px;
+  }
+  .eyebrow{
+    font-family:'Space Mono', monospace;
+    font-size:0.75rem;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    color:var(--rust);
+    margin:16px 0 20px;
+  }
+  h1{
+    font-family:'Anton', sans-serif;
+    font-size:clamp(1.8rem, 5vw, 2.6rem);
+    font-weight:400;
+    text-transform:uppercase;
+    letter-spacing:0.5px;
+    line-height:1.1;
+    margin-bottom:18px;
+  }
+  p{
+    font-size:1rem;
+    line-height:1.65;
+    color:var(--paper-dim);
+    margin-bottom:36px;
+  }
+  .btn{
+    font-family:'Space Mono', monospace;
+    font-size:0.85rem;
+    letter-spacing:0.5px;
+    text-transform:uppercase;
+    text-decoration:none;
+    padding:14px 28px;
+    display:inline-block;
+    background:var(--rust);
+    color:var(--paper);
+    border:1px solid var(--rust);
+    transition:transform .15s ease, background .15s ease;
+  }
+  .btn:hover{transform:translateY(-2px); background:#a5301f;}
+  ::selection{background:var(--rust); color:var(--paper);}
+</style>
+</head>
+<body>
+<nav>
+  <a class="brand" href="/">HARLEJ <span>REVIVAL</span> OLOMOUC</a>
+</nav>
+<main>
+  <div class="content">
+    <div class="code">404</div>
+    <div class="eyebrow">Stránka nenalezena</div>
+    <h1>Tuhle písničku<br>neznáme.</h1>
+    <p>Stránka, kterou hledáš, neexistuje nebo byla přesunuta. Ale hlavní set pořád běží — vrať se na úvodní stránku.</p>
+    <a class="btn" href="/">Zpět na hlavní stránku</a>
+  </div>
+</main>
+</body>
+</html>
