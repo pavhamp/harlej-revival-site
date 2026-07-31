@@ -181,7 +181,6 @@
   @media(min-width:840px){ .hamburger{display:none;} }
 
   .mobile-menu{
-    display:none;
     position:absolute;
     top:64px; left:0; right:0;
     background:rgba(22,18,16,0.98);
@@ -193,7 +192,6 @@
     transition:max-height .3s ease, padding .3s ease;
   }
   .mobile-menu.is-open{
-    display:block;
     max-height:320px;
     padding:8px 0 20px;
   }
@@ -465,6 +463,12 @@
   }
 
   /* ---------- SETLIST TICKET ---------- */
+  #repertoar .ticket{
+    background:#201d1a;
+  }
+  #repertoar .ticket::before, #repertoar .ticket::after{
+    background:var(--ink);
+  }
   .ticket{
     margin-top:48px;
     background:var(--ink);
@@ -618,10 +622,12 @@
 
   /* ---------- KONTAKT ---------- */
   footer{
-    background:var(--ink);
-    border-top:1px solid var(--line);
+    background:var(--paper);
+    color:var(--ink);
     padding:70px 0 40px;
   }
+  footer h2.h2{color:var(--ink);}
+  footer .kicker{color:var(--rust);}
   .contact-grid{
     display:grid;
     grid-template-columns:1fr;
@@ -633,7 +639,7 @@
     font-size:0.7rem;
     letter-spacing:1.5px;
     text-transform:uppercase;
-    color:var(--amber);
+    color:var(--rust);
     margin-bottom:10px;
   }
   .contact-block a.line{
@@ -641,18 +647,18 @@
     text-decoration:none;
     font-size:1.05rem;
     padding:10px 0;
-    border-bottom:1px solid var(--line);
-    color:var(--paper);
+    border-bottom:1px solid rgba(22,18,16,0.15);
+    color:var(--ink);
   }
-  .contact-block a.line:hover{color:var(--amber);}
+  .contact-block a.line:hover{color:var(--rust);}
   .foot-bottom{
     margin-top:60px;
     padding-top:24px;
-    border-top:1px solid var(--line);
+    border-top:1px solid rgba(22,18,16,0.15);
     display:flex; flex-wrap:wrap; justify-content:space-between; gap:10px;
     font-family:'Space Mono', monospace;
     font-size:0.72rem;
-    color:var(--paper-dim);
+    color:#4a4038;
     letter-spacing:0.5px;
   }
 
@@ -763,8 +769,9 @@
     </div>
   </div>
 </section>
+<div class="torn"></div>
 
-<section id="ukazky">
+<section class="section-paper" id="ukazky">
   <div class="wrap">
     <div class="kicker reveal">ukázky z akcí</div>
     <h2 class="h2 reveal" style="--reveal-delay:80ms">Neradi mluvíme.<br>Radši to pustíme.</h2>
@@ -778,7 +785,7 @@
     <p class="lede" id="reels-status" style="margin-top:18px; font-family:'Space Mono',monospace; font-size:0.8rem; display:none;"></p>
   </div>
 </section>
-<div class="torn"></div>
+<div class="torn flip section-paper"></div>
 
 <script>
 (function () {
@@ -834,7 +841,7 @@
 })();
 </script>
 
-<section class="section-paper" id="repertoar">
+<section id="repertoar">
   <div class="wrap">
     <div class="kicker reveal">repertoár</div>
     <h2 class="h2 reveal" style="--reveal-delay:80ms">Výběr z toho nejlepšího.</h2>
@@ -849,7 +856,7 @@
     </div>
   </div>
 </section>
-<div class="torn flip section-paper"></div>
+<div class="torn"></div>
 
 <footer id="kontakt">
   <div class="wrap">
