@@ -1,92 +1,101 @@
-# Harlej Revival Olomouc — web s napojením na Facebook
+# Harlej Revival Olomouc — web
 
-Statický web (`public/index.html`) + malý Node.js backend (`server.js`), který
-pravidelně stahuje videa z facebookové stránky přes Graph API a servíruje je
-frontendu. Když nahrajete nové video na Facebook, backend ho do 10 minut
-(nebo hned po ručním obnovení) automaticky vytáhne a zobrazí v sekci "Ukázky".
+Node.js/Express web s admin panelem a napojením na Facebook Graph API.
 
-## 1. Instalace
+## Požadavky
+
+- Node.js 18+
+- npm
+
+## Lokální spuštění
 
 ```bash
 npm install
-cp .env.example .env
 ```
 
-## 2. Získání Facebook Page ID a Access Tokenu
+Zkopíruj `.env.example` jako `.env` a vyplň hodnoty:
 
-Toto je jediná část, kterou musíte udělat ručně přes facebook.com /
-developers.facebook.com — Claude to za vás nemůže nastavit, protože jde o
-vaše přihlašovací údaje a schvalovací proces na straně Mety.
+```env
+ADMIN_PASSWORD=zvol-si-silne-heslo
+FACEBOOK_PAGE_ID=123456789
+FACEBOOK_PAGE_ACCESS_TOKEN=EAAxxxxxxxx...
+FACEBOOK_GRAPH_VERSION=v20.0
+PORT=3000
+```
 
-1. **Vytvořte si aplikaci** na [developers.facebook.com/apps](https://developers.facebook.com/apps) → "Create App" → typ "Business".
-2. V aplikaci přidejte produkt **Facebook Login** a/nebo rovnou použijte
-   **Graph API Explorer** (developers.facebook.com/tools/explorer).
-3. V Graph API Exploreru:
-   - Vyberte svou aplikaci nahoře.
-   - U "User or Page" zvolte **Get Page Access Token** a vyberte stránku
-     Harlej Revival Olomouc (musíte být admin stránky).
-   - Odsouhlaste oprávnění **pages_show_list** a **pages_read_engagement**.
-4. Tím dostanete **krátkodobý** token. Prodlužte si ho na dlouhodobý (60 dní,
-   dá se opakovaně obnovovat) podle [návodu Mety na dlouhodobé tokeny](https://developers.facebook.com/docs/facebook-login/guides/access-tokens/get-long-lived).
-5. Page ID najdete na stránce v **Nastavení stránky → O nás → ID stránky**,
-   nebo v Graph API Exploreru zavoláním `GET /me/accounts`.
-6. Obě hodnoty vložte do `.env`:
-   ```
-   FACEBOOK_PAGE_ID=123456789
-   FACEBOOK_PAGE_ACCESS_TOKEN=EAAxxxxxxxx...
-   ```
-
-**Poznámka k oprávněním:** Pokud token generujete jako admin vlastní
-stránky pro vlastní použití (ne pro cizí uživatele), obvykle není potřeba
-procházet plné **App Review** od Mety — stačí, že jste v roli
-administrátora/testera aplikace. Pokud by web měl číst videa z více
-stránek spravovaných jinými lidmi, App Review už potřeba bude.
-
-Token je citlivý údaj — nikdy ho nesdílejte ani necommitujte do gitu.
-Soubor `.env` by měl zůstat jen na vašem serveru.
-
-## 3. Spuštění
+Spuštění:
 
 ```bash
+# produkční režim
 npm start
+
+# vývojový režim (automatický restart při změně souboru)
+npm run dev
 ```
 
-Web poběží na `http://localhost:3000`. Backend si videa načte hned při
-startu a pak automaticky každých 10 minut.
+Web běží na `http://localhost:3000`, admin panel na `http://localhost:3000/admin.html`.
 
-Pro okamžité obnovení bez čekání (např. hned po nahrání nového videa)
-zavolejte:
+## Admin panel
+
+Správa obsahu webu probíhá přes `/admin.html` — statistiky, členové kapely, setlist, termíny koncertů a kontaktní údaje. Přihlášení heslem z `ADMIN_PASSWORD`.
+
+## Facebook Graph API
+
+Pro zobrazení videí v sekci "Ukázky" je potřeba:
+
+1. Vytvořit aplikaci na [developers.facebook.com/apps](https://developers.facebook.com/apps) → typ "Business"
+2. V **Graph API Exploreru** získat Page Access Token s oprávněními `pages_show_list` a `pages_read_engagement`
+3. Krátkodobý token prodloužit na dlouhodobý (60 dní) podle [návodu Mety](https://developers.facebook.com/docs/facebook-login/guides/access-tokens/get-long-lived)
+4. Page ID najdeš v Nastavení stránky → O nás → ID stránky
+
+Videa se synchronizují automaticky každých 10 minut. Pro ruční obnovení:
 
 ```bash
 curl -X POST http://localhost:3000/api/videos/refresh
 ```
 
-## 4. Jak to funguje
+## Deployment na Render
 
-- `server.js` volá `GET /{page-id}/videos` na Facebook Graph API a ukládá
-  výsledek do jednoduché paměťové cache (žádná databáze není potřeba pro
-  pár videí).
-- Frontend (`public/index.html`) při načtení stránky zavolá `/api/videos`
-  na vlastním backendu a vykreslí karty s náhledovým obrázkem, názvem a
-  odkazem na video na Facebooku.
-- Pokud stažení z Facebooku selže (např. vypršel token), web zobrazí
-  poslední známá videa z cache a tichou poznámku pod nimi — nikdy
-  nezůstane prázdný kvůli chybě API.
+1. Pushni kód na GitHub
+2. Na [render.com](https://render.com) vytvoř **New → Web Service** napojený na GitHub repo
+3. Nastav:
+   - **Build Command:** `npm install`
+   - **Start Command:** `node server.js`
+   - **Instance Type:** Free
+4. V sekci **Environment** přidej proměnné ze svého `.env`
+5. Klikni **Deploy Web Service**
 
-## 5. Hosting (až budete řešit)
+Render automaticky nasadí každý push na `master`.
 
-Cokoliv, co umí spustit Node.js proces s otevřeným portem — např. Railway,
-Render, vlastní VPS s PM2/nginx apod. Až budete hosting vybírat, dejte
-vědět a pomůžu s konkrétním nastavením (env proměnné, reverse proxy, atd.).
+### Vlastní doména
+
+V Render dashboardu: **Settings → Custom Domains → Add Custom Domain**.
+Render vygeneruje DNS záznamy, které nastavíš u svého registrátora. HTTPS certifikát se vytvoří automaticky.
+
+Po přidání domény aktualizuj URL v `public/index.html` (OG tagy a JSON-LD) a commitni.
 
 ## Struktura projektu
 
 ```
-harlej-site/
-├── server.js          backend + Graph API sync
+harlej-revival-site/
+├── server.js              Express server, Graph API sync, admin API
 ├── package.json
-├── .env.example        vzor konfigurace (zkopírovat jako .env)
-├── public/
-│   └── index.html      web (design + JS pro načtení videí)
-└── README.md
+├── .env                   Lokální konfigurace (nesdílet, není v gitu)
+├── data/
+│   └── content.json       Obsah webu (setlist, termíny, kontakt…)
+├── pictures/              Originální fotky
+└── public/
+    ├── index.html         Hlavní stránka
+    ├── admin.html         Admin panel
+    ├── 404.html           Stránka pro nenalezené URL
+    └── img/
+        ├── hero.jpg       Fotka kapely v hero sekci
+        └── favicon.webp   Favicon (logo kapely)
 ```
+
+## Bezpečnost
+
+- HTTP security headers zajišťuje **Helmet**
+- Admin endpointy mají **rate limiting** (20 req / 15 min na IP)
+- POST požadavky jsou omezeny na **50 KB**
+- `.env` je v `.gitignore` — nikdy ho necommituj
