@@ -129,7 +129,7 @@
   .navcta{
     display:none;
   }
-  @media(min-width:720px){
+  @media(min-width:840px){
     .navcta{
       display:inline-block;
       background:var(--rust);
@@ -234,7 +234,7 @@
   /* ---------- HERO ---------- */
   header.hero{
     position:relative;
-    padding:96px 0 140px;
+    padding:64px 0 72px;
     background:
       radial-gradient(ellipse 900px 500px at 18% -10%, rgba(232,163,61,0.20), transparent 60%),
       radial-gradient(ellipse 700px 500px at 100% 10%, rgba(192,57,43,0.18), transparent 55%),
@@ -249,6 +249,7 @@
   }
   @media(min-width:900px){
     .hero-inner{grid-template-columns:1fr 420px;}
+    header.hero{padding:96px 0 140px;}
   }
   .hero-photo{
     position:relative;
@@ -358,7 +359,8 @@
   .section-paper .torn{background:var(--paper);}
 
   /* ---------- SECTION GENERIC ---------- */
-  section{padding:88px 0;}
+  section{padding:56px 0;}
+  @media(min-width:720px){section{padding:88px 0;}}
   .kicker{
     font-family:'Space Mono', monospace;
     font-size:0.75rem;
@@ -488,10 +490,11 @@
   .ticket-main .kicker{margin-bottom:10px;}
   .setlist{
     list-style:none; margin:16px 0 0; padding:0;
-    columns:2; column-gap:26px;
+    columns:1; column-gap:26px;
     font-family:'Space Mono', monospace;
     font-size:0.85rem;
   }
+  @media(min-width:480px){ .setlist{columns:2;} }
   .setlist li{
     padding:7px 0;
     border-bottom:1px solid var(--line);
