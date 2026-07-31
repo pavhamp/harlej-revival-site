@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import { readFile, writeFile, mkdir } from "fs/promises";
 import helmet from "helmet";
 import rateLimit from "express-rate-limit";
+import compression from "compression";
 
 dotenv.config();
 
@@ -112,6 +113,8 @@ function requireAdminPassword(req, res, next) {
   next();
 }
 
+app.use(compression());
+
 app.use(helmet({
   contentSecurityPolicy: {
     directives: {
@@ -134,7 +137,12 @@ const adminLimiter = rateLimit({
 });
 
 app.use(express.json({ limit: "50kb" }));
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "public"), {
+  maxAge: "7d",
+  setHeaders(res, filePath) {
+    if (filePath.endsWith(".html")) res.setHeader("Cache-Control", "no-cache");
+  },
+}));
 
 // --- Videos API ---
 
