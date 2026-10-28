@@ -305,6 +305,19 @@
     .gig-row-admin .btn-remove { grid-column: 2; grid-row: 1; }
   }
 
+  textarea.input {
+    resize: vertical;
+    min-height: 68px;
+    line-height: 1.5;
+    font-family: 'Space Mono', monospace;
+  }
+  .field-note {
+    margin-top: 6px;
+    font-size: 0.68rem;
+    color: var(--paper-dim);
+    font-family: 'Space Mono', monospace;
+    line-height: 1.4;
+  }
   ::selection { background: var(--rust); color: var(--paper); }
   :focus-visible { outline: 2px solid var(--amber); outline-offset: 2px; }
 </style>
@@ -337,6 +350,105 @@
   <main class="admin-main">
     <a class="back-link" href="/">← Zpět na web</a>
 
+    <!-- HERO TEXTY -->
+    <div class="section">
+      <div class="section-title">Hero — texty</div>
+      <div class="field-group">
+        <label class="field-label" for="hero-eyebrow">Eyebrow (malý text nad nadpisem)</label>
+        <input class="input" type="text" id="hero-eyebrow-inp" placeholder="jediná revivalová skupina harlej v čr">
+      </div>
+      <div class="field-group">
+        <label class="field-label">Nadpis — 3 řádky</label>
+        <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px;">
+          <input class="input" type="text" id="hero-title-1" placeholder="Řádek 1">
+          <input class="input" type="text" id="hero-title-2" placeholder="Řádek 2">
+          <input class="input" type="text" id="hero-title-3" placeholder="Řádek 3">
+        </div>
+        <p class="field-note">Zvýrazněné slovo (rust barva): <input class="input" type="text" id="hero-title-accent" placeholder="PARTA." style="display:inline-block; width:140px; margin-left:8px; padding:6px 10px;"></p>
+      </div>
+      <div class="field-group">
+        <label class="field-label" for="hero-subhead-inp">Perex (odstavec pod nadpisem)</label>
+        <textarea class="input" id="hero-subhead-inp" placeholder="Hrajeme to nejlepší z Harleje..."></textarea>
+      </div>
+      <div class="field-group">
+        <label class="field-label" for="hero-cta-inp">Text CTA tlačítka</label>
+        <input class="input" type="text" id="hero-cta-inp" placeholder="Poptat vystoupení">
+      </div>
+    </div>
+
+    <!-- O KAPELE TEXTY -->
+    <div class="section">
+      <div class="section-title">O kapele — texty sekce</div>
+      <div class="field-group">
+        <label class="field-label" for="about-kicker-inp">Kicker</label>
+        <input class="input" type="text" id="about-kicker-inp" placeholder="o kapele">
+      </div>
+      <div class="field-group">
+        <label class="field-label" for="about-heading-inp">Nadpis (nový řádek = Enter)</label>
+        <textarea class="input" id="about-heading-inp" placeholder="Pět pohodářů,&#10;co to nehrajou na půl plynu."></textarea>
+      </div>
+      <div class="field-group">
+        <label class="field-label" for="about-lede-inp">Popis kapely</label>
+        <textarea class="input" id="about-lede-inp" style="min-height:100px;"></textarea>
+      </div>
+      <div class="field-group">
+        <label class="field-label">Tagy (typy akcí)</label>
+        <div id="about-tags-container"></div>
+        <button class="btn-add" onclick="addTagRow()" style="margin-top:6px;">+ Přidat tag</button>
+      </div>
+      <div class="field-group">
+        <label class="field-label" for="about-tagline-inp">Doplňující věta (pod tagy)</label>
+        <input class="input" type="text" id="about-tagline-inp">
+      </div>
+    </div>
+
+    <!-- TERMÍNY TEXTY -->
+    <div class="section">
+      <div class="section-title">Termíny — texty sekce</div>
+      <div class="field-group">
+        <label class="field-label" for="gigs-kicker-inp">Kicker</label>
+        <input class="input" type="text" id="gigs-kicker-inp">
+      </div>
+      <div class="field-group">
+        <label class="field-label" for="gigs-heading-inp">Nadpis (nový řádek = Enter)</label>
+        <textarea class="input" id="gigs-heading-inp"></textarea>
+      </div>
+      <div class="field-group">
+        <label class="field-label" for="gigs-lede-inp">Popis</label>
+        <input class="input" type="text" id="gigs-lede-inp">
+      </div>
+    </div>
+
+    <!-- UKÁZKY TEXTY -->
+    <div class="section">
+      <div class="section-title">Ukázky — texty sekce</div>
+      <div class="field-group">
+        <label class="field-label" for="chorus-kicker-inp">Kicker</label>
+        <input class="input" type="text" id="chorus-kicker-inp">
+      </div>
+      <div class="field-group">
+        <label class="field-label" for="chorus-heading-inp">Nadpis</label>
+        <input class="input" type="text" id="chorus-heading-inp">
+      </div>
+      <div class="field-group">
+        <label class="field-label" for="chorus-lede-inp">Popis</label>
+        <input class="input" type="text" id="chorus-lede-inp">
+      </div>
+    </div>
+
+    <!-- KONTAKT TEXTY -->
+    <div class="section">
+      <div class="section-title">Kontakt — texty sekce</div>
+      <div class="field-group">
+        <label class="field-label" for="contact-kicker-inp">Kicker</label>
+        <input class="input" type="text" id="contact-kicker-inp">
+      </div>
+      <div class="field-group">
+        <label class="field-label" for="contact-heading-inp">Nadpis (nový řádek = Enter)</label>
+        <textarea class="input" id="contact-heading-inp"></textarea>
+      </div>
+    </div>
+
     <!-- STATISTIKY -->
     <div class="section">
       <div class="section-title">Statistiky (hero sekce)</div>
@@ -352,26 +464,6 @@
       <div class="section-title">Členové kapely</div>
       <div id="roster-container"></div>
       <button class="btn-add" onclick="addRosterRow()">+ Přidat člena</button>
-    </div>
-
-    <!-- SETLIST -->
-    <div class="section">
-      <div class="section-title">Setlist / repertoár</div>
-      <div id="setlist-container"></div>
-      <button class="btn-add" onclick="addSetlistRow()">+ Přidat píseň</button>
-    </div>
-
-    <!-- INFO O SHOW -->
-    <div class="section">
-      <div class="section-title">Info o show (lístek)</div>
-      <div class="field-group">
-        <label class="field-label" for="show-duration">Délka show</label>
-        <input class="input" type="text" id="show-duration" placeholder="např. až 90 min">
-      </div>
-      <div class="field-group">
-        <label class="field-label" for="show-format">Formát</label>
-        <input class="input" type="text" id="show-format" placeholder="např. sólo i vedle dalších kapel">
-      </div>
     </div>
 
     <!-- TERMÍNY -->
@@ -390,21 +482,25 @@
       <button class="btn-add" onclick="addGigRow()">+ Přidat termín</button>
     </div>
 
+    <!-- UKÁZKY -->
+    <div class="section">
+      <div class="section-title">Ukázky</div>
+      <div style="display:grid; grid-template-columns:1fr 1fr 32px; gap:8px; margin-bottom:6px;">
+        <div class="col-header" style="font-size:0.65rem; letter-spacing:1px; text-transform:uppercase; color:var(--paper-dim); padding-bottom:4px; border-bottom:1px solid var(--border);">Název skladby</div>
+        <div class="col-header" style="font-size:0.65rem; letter-spacing:1px; text-transform:uppercase; color:var(--paper-dim); padding-bottom:4px; border-bottom:1px solid var(--border);">Název souboru (např. zfetovanej.wav)</div>
+        <div></div>
+      </div>
+      <div id="chorus-container"></div>
+      <button class="btn-add" onclick="addChorusRow()">+ Přidat ukázku</button>
+      <p style="margin-top:12px; font-size:0.72rem; color:var(--paper-dim); font-family:'Space Mono',monospace; line-height:1.5;">
+        Soubory nahraj ručně do složky <code style="color:var(--amber);">public/audio/</code> na serveru.
+      </p>
+    </div>
+
     <!-- KONTAKT -->
     <div class="section">
       <div class="section-title">Kontakt &amp; sociální sítě</div>
 
-      <div class="section-sub">Booking</div>
-      <div class="contact-pair">
-        <div>
-          <label class="field-label" for="booking-label">Text odkazu</label>
-          <input class="input" type="text" id="booking-label" placeholder="Drát Production...">
-        </div>
-        <div>
-          <label class="field-label" for="booking-href">URL</label>
-          <input class="input" type="text" id="booking-href" placeholder="https://...">
-        </div>
-      </div>
 
       <div class="section-sub">E-mail</div>
       <div class="contact-pair">
@@ -532,6 +628,44 @@ async function loadContent() {
 }
 
 function populateForm(data) {
+  // Hero texty
+  var hero = data.hero || {};
+  document.getElementById('hero-eyebrow-inp').value = hero.eyebrow || '';
+  var tl = hero.titleLines || ['', '', ''];
+  document.getElementById('hero-title-1').value = tl[0] || '';
+  document.getElementById('hero-title-2').value = tl[1] || '';
+  document.getElementById('hero-title-3').value = tl[2] || '';
+  document.getElementById('hero-title-accent').value = hero.titleAccent || '';
+  document.getElementById('hero-subhead-inp').value = hero.subhead || '';
+  document.getElementById('hero-cta-inp').value = hero.ctaLabel || '';
+
+  // About texty
+  var about = data.about || {};
+  document.getElementById('about-kicker-inp').value = about.kicker || '';
+  document.getElementById('about-heading-inp').value = about.heading || '';
+  document.getElementById('about-lede-inp').value = about.lede || '';
+  document.getElementById('about-tagline-inp').value = about.tagline || '';
+  var tc = document.getElementById('about-tags-container');
+  tc.innerHTML = '';
+  (about.tags || []).forEach(function (t) { addTagRow(t); });
+
+  // Termíny texty
+  var gs = data.gigsSection || {};
+  document.getElementById('gigs-kicker-inp').value = gs.kicker || '';
+  document.getElementById('gigs-heading-inp').value = gs.heading || '';
+  document.getElementById('gigs-lede-inp').value = gs.lede || '';
+
+  // Ukázky texty
+  var cs = data.chorusSection || {};
+  document.getElementById('chorus-kicker-inp').value = cs.kicker || '';
+  document.getElementById('chorus-heading-inp').value = cs.heading || '';
+  document.getElementById('chorus-lede-inp').value = cs.lede || '';
+
+  // Kontakt texty
+  var con = data.contactSection || {};
+  document.getElementById('contact-kicker-inp').value = con.kicker || '';
+  document.getElementById('contact-heading-inp').value = con.heading || '';
+
   // Stats
   const sc = document.getElementById('stats-container');
   sc.innerHTML = '';
@@ -543,25 +677,18 @@ function populateForm(data) {
   rc.innerHTML = '';
   (data.roster || []).forEach(function (m) { addRosterRow(m.role, m.desc); });
 
-  // Setlist
-  const slc = document.getElementById('setlist-container');
-  slc.innerHTML = '';
-  (data.setlist || []).forEach(function (s) { addSetlistRow(s.title); });
-  updateSetlistNumbers();
-
   // Gigs
   var gc = document.getElementById('gigs-container');
   gc.innerHTML = '';
   (data.gigs || []).forEach(function (g) { addGigRow(g.date, g.venue, g.city, g.ticketHref); });
 
-  // Show info
-  document.getElementById('show-duration').value = (data.showInfo || {}).duration || '';
-  document.getElementById('show-format').value = (data.showInfo || {}).format || '';
+  // Choruses
+  var cc = document.getElementById('chorus-container');
+  cc.innerHTML = '';
+  (data.choruses || []).forEach(function (c) { addChorusRow(c.title, c.file); });
 
   // Contact
   const c = data.contact || {};
-  document.getElementById('booking-label').value = c.bookingLabel || '';
-  document.getElementById('booking-href').value = c.bookingHref || '';
   document.getElementById('email-label').value = c.emailLabel || '';
   document.getElementById('email-href').value = c.emailHref || '';
   document.getElementById('phone-label').value = c.phoneLabel || '';
@@ -636,6 +763,32 @@ function addGigRow(date, venue, city, ticketHref) {
   container.appendChild(row);
 }
 
+// --- TAG ROWS ---
+function addTagRow(val) {
+  val = val || '';
+  var container = document.getElementById('about-tags-container');
+  var row = document.createElement('div');
+  row.className = 'row';
+  row.innerHTML =
+    '<input class="input tag-input" placeholder="např. Festivaly" value="' + ea(val) + '">' +
+    '<button class="btn-remove" title="Odebrat" onclick="this.closest(\'.row\').remove()">×</button>';
+  container.appendChild(row);
+}
+
+// --- CHORUS ROWS ---
+function addChorusRow(title, file) {
+  title = title || ''; file = file || '';
+  var container = document.getElementById('chorus-container');
+  var row = document.createElement('div');
+  row.className = 'row';
+  row.style.cssText = 'display:grid; grid-template-columns:1fr 1fr 32px; gap:8px; margin-bottom:8px;';
+  row.innerHTML =
+    '<input class="input chorus-title-input" placeholder="Název skladby" value="' + ea(title) + '">' +
+    '<input class="input chorus-file-input" placeholder="soubor.wav" value="' + ea(file) + '">' +
+    '<button class="btn-remove" title="Odebrat" onclick="this.closest(\'.row\').remove()">×</button>';
+  container.appendChild(row);
+}
+
 // --- COLLECT & SAVE ---
 function collectData() {
   var stats = [];
@@ -653,12 +806,6 @@ function collectData() {
     if (role || desc) roster.push({ role: role, desc: desc });
   });
 
-  var setlist = [];
-  document.querySelectorAll('#setlist-container .row').forEach(function (row, i) {
-    var title = row.querySelector('.title-input').value.trim();
-    if (title) setlist.push({ num: String(i + 1).padStart(2, '0'), title: title });
-  });
-
   var gigs = [];
   document.querySelectorAll('#gigs-container .gig-row-admin').forEach(function (row) {
     var date = row.querySelector('.gig-date-input').value.trim();
@@ -669,18 +816,56 @@ function collectData() {
   });
   gigs.sort(function (a, b) { return a.date < b.date ? -1 : 1; });
 
+  var choruses = [];
+  document.querySelectorAll('#chorus-container .row').forEach(function (row) {
+    var title = row.querySelector('.chorus-title-input').value.trim();
+    var file = row.querySelector('.chorus-file-input').value.trim();
+    if (title || file) choruses.push({ title: title, file: file });
+  });
+
+  var tags = [];
+  document.querySelectorAll('#about-tags-container .row .tag-input').forEach(function (inp) {
+    var v = inp.value.trim(); if (v) tags.push(v);
+  });
+
   return {
+    hero: {
+      eyebrow: document.getElementById('hero-eyebrow-inp').value.trim(),
+      titleLines: [
+        document.getElementById('hero-title-1').value.trim(),
+        document.getElementById('hero-title-2').value.trim(),
+        document.getElementById('hero-title-3').value.trim()
+      ],
+      titleAccent: document.getElementById('hero-title-accent').value.trim(),
+      subhead: document.getElementById('hero-subhead-inp').value.trim(),
+      ctaLabel: document.getElementById('hero-cta-inp').value.trim()
+    },
+    about: {
+      kicker: document.getElementById('about-kicker-inp').value.trim(),
+      heading: document.getElementById('about-heading-inp').value.trim(),
+      lede: document.getElementById('about-lede-inp').value.trim(),
+      tags: tags,
+      tagline: document.getElementById('about-tagline-inp').value.trim()
+    },
+    gigsSection: {
+      kicker: document.getElementById('gigs-kicker-inp').value.trim(),
+      heading: document.getElementById('gigs-heading-inp').value.trim(),
+      lede: document.getElementById('gigs-lede-inp').value.trim()
+    },
+    chorusSection: {
+      kicker: document.getElementById('chorus-kicker-inp').value.trim(),
+      heading: document.getElementById('chorus-heading-inp').value.trim(),
+      lede: document.getElementById('chorus-lede-inp').value.trim()
+    },
+    contactSection: {
+      kicker: document.getElementById('contact-kicker-inp').value.trim(),
+      heading: document.getElementById('contact-heading-inp').value.trim()
+    },
     stats: stats,
     roster: roster,
-    setlist: setlist,
     gigs: gigs,
-    showInfo: {
-      duration: document.getElementById('show-duration').value.trim(),
-      format: document.getElementById('show-format').value.trim()
-    },
+    choruses: choruses,
     contact: {
-      bookingLabel: document.getElementById('booking-label').value.trim(),
-      bookingHref: document.getElementById('booking-href').value.trim(),
       emailLabel: document.getElementById('email-label').value.trim(),
       emailHref: document.getElementById('email-href').value.trim(),
       phoneLabel: document.getElementById('phone-label').value.trim(),

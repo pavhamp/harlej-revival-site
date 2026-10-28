@@ -1,4 +1,32 @@
 {
+  "hero": {
+    "eyebrow": "jediná revivalová skupina harlej v čr",
+    "titleLines": ["PĚT CHLAPŮ.", "JEDNA PARTA.", "VŠECHNY PECKY."],
+    "titleAccent": "PARTA.",
+    "subhead": "Hrajeme to nejlepší z Harleje s energií, náloží a upřímnou úctou k originálu — a mezi songy vám prozradíme i pár věcí, co jste o kapele možná nevěděli.",
+    "ctaLabel": "Poptat vystoupení"
+  },
+  "about": {
+    "kicker": "o kapele",
+    "heading": "Pět pohodářů,\nco to nehrajou na půl plynu.",
+    "lede": "Máte rádi Harlej? My taky — a to natolik, že jsme se rozhodli založit jejich revival. Na pódiu si dáváme záležet nejen na muzice, ale i na show: pár kostýmních narážek, historky o originální kapele a energie, která nedovolí nikomu jen tak postávat u piva.",
+    "tags": ["Festivaly", "Městské slavnosti", "Předvánoční programy", "Plesy a oslavy"],
+    "tagline": "Vystupujeme po celé ČR — od menších náměstí po revival festivaly s dalšími kapelami na pódiu."
+  },
+  "gigsSection": {
+    "kicker": "kde nás najdete",
+    "heading": "Nadcházející\nvystoupení.",
+    "lede": "Přijďte si zazpívat naživo — sledujte termíny a rezervujte si místo včas."
+  },
+  "chorusSection": {
+    "kicker": "ukázky",
+    "heading": "Pusť si to.",
+    "lede": "Krátké ukázky z repertoáru — rovnou z nahrávky."
+  },
+  "contactSection": {
+    "kicker": "kontakt",
+    "heading": "Máte termín?\nPojďme ho zaplnit."
+  },
   "stats": [
     {
       "num": "90'",
@@ -16,23 +44,28 @@
   "roster": [
     {
       "role": "Zpěv",
-      "desc": "Frontman party, drží mikrofon i publikum v jedné ruce."
+      "desc": "Frontman party, drží mikrofon i publikum v jedné ruce.",
+      "photo": "/img/zpev.jpg"
     },
     {
       "role": "Kytara",
-      "desc": "Riffy, které znáte zpaměti, přesně tak, jak mají znít."
+      "desc": "Riffy, které znáte zpaměti, přesně tak, jak mají znít.",
+      "photo": "/img/kytara1.jpg"
     },
     {
       "role": "Baskytara",
-      "desc": "Základ, na kterém stojí každá správná punkrocková show."
+      "desc": "Základ, na kterém stojí každá správná punkrocková show.",
+      "photo": "/img/baskytara.jpg"
     },
     {
       "role": "Bicí",
-      "desc": "Tempo, které nedovolí publiku vystřízlivět."
+      "desc": "Tempo, které nedovolí publiku vystřízlivět.",
+      "photo": "/img/bici.jpg"
     },
     {
       "role": "Kytara",
-      "desc": ""
+      "desc": "",
+      "photo": "/img/kytara2.jpg"
     }
   ],
   "setlist": [
@@ -182,13 +215,16 @@
       "ticketHref": ""
     }
   ],
+  "choruses": [
+    { "title": "Až tady jednou nebudu", "file": "aztadyjednounebudu.wav" },
+    { "title": "Proč pocit mám", "file": "procpocitmam.wav" },
+    { "title": "Tráva", "file": "trava.wav" }
+  ],
   "showInfo": {
     "duration": "až 90 min",
     "format": "sólo i vedle dalších kapel"
   },
   "contact": {
-    "bookingLabel": "Drát Production — booking dotaz",
-    "bookingHref": "#",
     "emailLabel": "E-mail",
     "emailHref": "#",
     "phoneLabel": "Telefon",

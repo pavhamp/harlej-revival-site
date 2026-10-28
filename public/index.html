@@ -145,6 +145,37 @@
   .navlinks{display:none;}
   @media(min-width:840px){ .navlinks{display:flex;} }
 
+  /* ---------- NAV SOCIALS ---------- */
+  .nav-socials{
+    display:flex; align-items:center; gap:2px;
+    margin-left:8px;
+  }
+  .nav-socials a{
+    display:flex; align-items:center; justify-content:center;
+    width:34px; height:34px;
+    color:var(--paper-dim);
+    text-decoration:none;
+    border-radius:2px;
+    transition:color .2s, background .2s;
+  }
+  .nav-socials a:hover{color:var(--amber); background:rgba(237,230,214,0.06);}
+  .nav-socials{display:none;}
+  @media(min-width:840px){ .nav-socials{display:flex;} }
+  .mob-socials{
+    display:flex; gap:4px;
+    padding:16px 20px 4px;
+  }
+  .mob-socials a{
+    display:flex; align-items:center; justify-content:center;
+    width:42px; height:42px;
+    color:var(--paper-dim);
+    text-decoration:none;
+    border:1px solid var(--line);
+    border-radius:2px;
+    transition:color .2s, border-color .2s;
+  }
+  .mob-socials a:hover{color:var(--amber); border-color:var(--amber);}
+
   /* ---------- HAMBURGER ---------- */
   .hamburger{
     display:flex;
@@ -380,143 +411,62 @@
   .section-paper .lede{color:#4a4038;}
 
   /* ---------- O KAPELE ---------- */
-  .about-grid{
+  .about-intro{
     display:grid;
     grid-template-columns:1fr;
-    gap:40px;
-    margin-top:46px;
+    gap:28px;
+    margin-top:0;
   }
-  @media(min-width:800px){ .about-grid{grid-template-columns:1.1fr 0.9fr;} }
+  @media(min-width:800px){ .about-intro{grid-template-columns:1fr 1fr; align-items:start;} }
   .roster{
     display:grid;
     grid-template-columns:repeat(2,1fr);
     gap:1px;
     background:var(--line);
     border:1px solid var(--line);
+    margin-top:52px;
   }
-  .roster div{
+  @media(min-width:560px){ .roster{grid-template-columns:repeat(3,1fr);} }
+  @media(min-width:900px){ .roster{grid-template-columns:repeat(5,1fr);} }
+  .roster .member-card{
     background:var(--ink);
-    padding:18px 16px;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+  }
+  .roster .member-photo{
+    width:100%;
+    aspect-ratio:3/4;
+    object-fit:cover;
+    object-position:top center;
+    display:block;
+    filter:grayscale(15%) contrast(1.05);
+    transition:filter .3s ease, transform .3s ease;
+  }
+  .member-card:hover .member-photo{
+    filter:grayscale(0%) contrast(1.05);
+    transform:scale(1.03);
+  }
+  .roster .member-info{
+    padding:14px 14px 16px;
   }
   .roster .role{
     font-family:'Space Mono', monospace;
-    font-size:0.72rem;
+    font-size:0.7rem;
     letter-spacing:1px;
     text-transform:uppercase;
     color:var(--amber);
   }
   .roster .desc{
-    font-size:0.92rem;
+    font-size:0.88rem;
     color:var(--paper-dim);
-    margin-top:6px;
+    margin-top:5px;
     line-height:1.5;
   }
 
   /* ---------- VIDEO / UKAZKY ---------- */
   .section-paper h2.h2, .section-paper .kicker{color:var(--ink);}
   .section-paper .kicker{color:var(--rust);}
-  .reels{
-    display:grid;
-    grid-template-columns:repeat(auto-fit, minmax(200px,1fr));
-    gap:22px;
-    margin-top:44px;
-  }
-  .reel-card{
-    background:var(--ink);
-    color:var(--paper);
-    aspect-ratio:9/13;
-    position:relative;
-    display:flex;
-    flex-direction:column;
-    justify-content:flex-end;
-    padding:18px;
-    overflow:hidden;
-    border:1px solid rgba(0,0,0,0.2);
-  }
-  .reel-card::before{
-    content:"";
-    position:absolute; inset:0;
-    background:linear-gradient(200deg, rgba(232,163,61,0.35), rgba(192,57,43,0.25) 55%, rgba(22,18,16,0.9));
-  }
-  .reel-card .play{
-    position:absolute; top:16px; right:16px;
-    width:34px; height:34px;
-    border:1px solid rgba(237,230,214,0.6);
-    border-radius:50%;
-    display:flex; align-items:center; justify-content:center;
-    font-size:0.7rem;
-    z-index:2;
-  }
-  .reel-card .views{
-    font-family:'Anton', sans-serif;
-    font-size:1.6rem;
-    z-index:2;
-    color:var(--paper);
-  }
-  .reel-card .caption{
-    font-family:'Space Mono', monospace;
-    font-size:0.72rem;
-    letter-spacing:0.5px;
-    color:var(--paper-dim);
-    z-index:2;
-    margin-top:4px;
-  }
-
-  /* ---------- SETLIST TICKET ---------- */
-  #repertoar .ticket{
-    background:#201d1a;
-  }
-  #repertoar .ticket::before, #repertoar .ticket::after{
-    background:var(--ink);
-  }
-  .ticket{
-    margin-top:48px;
-    background:var(--ink);
-    border:1px dashed rgba(237,230,214,0.35);
-    position:relative;
-    display:grid;
-    grid-template-columns:1fr;
-    max-width:640px;
-  }
-  @media(min-width:640px){ .ticket{grid-template-columns:1fr 190px;} }
-  .ticket::before, .ticket::after{
-    content:"";
-    position:absolute;
-    width:26px; height:26px;
-    background:var(--paper);
-    border-radius:50%;
-    top:50%; transform:translateY(-50%);
-  }
-  .ticket::before{left:-13px;}
-  .ticket::after{right:-13px;}
-  @media(max-width:639px){ .ticket::before, .ticket::after{display:none;} }
-  .ticket-main{padding:28px 30px;}
-  .ticket-main .kicker{margin-bottom:10px;}
-  .setlist{
-    list-style:none; margin:16px 0 0; padding:0;
-    columns:1; column-gap:26px;
-    font-family:'Space Mono', monospace;
-    font-size:0.85rem;
-  }
-  @media(min-width:480px){ .setlist{columns:2;} }
-  .setlist li{
-    padding:7px 0;
-    border-bottom:1px solid var(--line);
-    break-inside:avoid;
-    color:var(--paper-dim);
-  }
-  .setlist li b{color:var(--paper); font-weight:400;}
-  .ticket-stub{
-    border-top:1px dashed rgba(237,230,214,0.35);
-    padding:22px 24px;
-    display:flex; flex-direction:column; justify-content:center;
-    gap:6px;
-  }
-  @media(min-width:640px){
-    .ticket-stub{border-top:none; border-left:1px dashed rgba(237,230,214,0.35);}
-  }
-  .ticket-stub .lbl{font-family:'Space Mono',monospace; font-size:0.68rem; letter-spacing:1px; color:var(--amber); text-transform:uppercase;}
-  .ticket-stub .val{font-family:'Anton', sans-serif; font-size:1.3rem;}
 
   /* ---------- TERMÍNY ---------- */
   .gigs-list{
@@ -572,6 +522,41 @@
     color:var(--paper-dim);
   }
 
+  /* ---------- UKÁZKY ---------- */
+  .chorus-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(260px,1fr));
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+    margin-top:44px;
+  }
+  .chorus-card{
+    background:#1a1714;
+    padding:22px 22px 18px;
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+  }
+  .chorus-title{
+    font-family:'Oswald', sans-serif;
+    font-size:1rem;
+    letter-spacing:0.5px;
+    text-transform:uppercase;
+    color:var(--paper);
+  }
+  .chorus-card audio{
+    width:100%;
+    accent-color:var(--amber);
+  }
+  .chorus-empty{
+    padding:32px;
+    font-family:'Space Mono', monospace;
+    font-size:0.85rem;
+    color:var(--paper-dim);
+    background:#1a1714;
+  }
+
   /* ---------- REFERENCE ---------- */
   .ref-row{
     display:flex; flex-wrap:wrap; gap:14px 34px;
@@ -622,11 +607,11 @@
 
   /* ---------- KONTAKT ---------- */
   footer{
-    background:var(--paper);
-    color:var(--ink);
+    background:var(--ink);
+    color:var(--paper);
     padding:70px 0 40px;
   }
-  footer h2.h2{color:var(--ink);}
+  footer h2.h2{color:var(--paper);}
   footer .kicker{color:var(--rust);}
   .contact-grid{
     display:grid;
@@ -647,18 +632,18 @@
     text-decoration:none;
     font-size:1.05rem;
     padding:10px 0;
-    border-bottom:1px solid rgba(22,18,16,0.15);
-    color:var(--ink);
+    border-bottom:1px solid var(--line);
+    color:var(--paper);
   }
-  .contact-block a.line:hover{color:var(--rust);}
+  .contact-block a.line:hover{color:var(--amber);}
   .foot-bottom{
     margin-top:60px;
     padding-top:24px;
-    border-top:1px solid rgba(22,18,16,0.15);
+    border-top:1px solid var(--line);
     display:flex; flex-wrap:wrap; justify-content:space-between; gap:10px;
     font-family:'Space Mono', monospace;
     font-size:0.72rem;
-    color:#4a4038;
+    color:var(--paper-dim);
     letter-spacing:0.5px;
   }
 
@@ -681,9 +666,86 @@
     *{transition:none !important;}
     .reveal{opacity:1; transform:none;}
   }
+
+  /* ---------- INTRO OVERLAY ---------- */
+  #intro-overlay{
+    position:fixed;
+    inset:0;
+    z-index:9999;
+    background:var(--ink);
+    overflow:hidden;
+    opacity:1;
+    transition:opacity .8s ease;
+  }
+  #intro-overlay.is-leaving{
+    opacity:0;
+    pointer-events:none;
+  }
+  #intro-video{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+  }
+  #intro-enter{
+    position:absolute;
+    inset:0;
+    z-index:3;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:rgba(22,18,16,0.55);
+    transition:opacity .4s ease;
+  }
+  #intro-enter.is-leaving{opacity:0; pointer-events:none;}
+  #intro-play-btn{
+    width:88px; height:88px;
+    border-radius:50%;
+    border:2px solid var(--paper);
+    background:transparent;
+    color:var(--paper);
+    font-size:1.8rem;
+    cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
+    padding-left:6px;
+    transition:transform .2s ease, background .2s ease;
+  }
+  #intro-play-btn:hover{transform:scale(1.1); background:rgba(237,230,214,0.12);}
+  #intro-skip{
+    position:absolute;
+    bottom:32px;
+    right:32px;
+    z-index:4;
+    font-family:'Space Mono', monospace;
+    font-size:0.78rem;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    color:var(--paper-dim);
+    background:transparent;
+    border:1px solid rgba(237,230,214,0.25);
+    padding:10px 20px;
+    cursor:pointer;
+    transition:color .15s, border-color .15s;
+  }
+  #intro-skip:hover, #intro-skip:focus-visible{
+    color:var(--paper);
+    border-color:rgba(237,230,214,0.65);
+  }
+  body.intro-active{overflow:hidden;}
 </style>
 </head>
 <body>
+
+<div id="intro-overlay">
+  <video id="intro-video" muted playsinline preload="auto">
+    <source src="/video/intro.mp4" type="video/mp4">
+  </video>
+  <div id="intro-enter">
+    <button id="intro-play-btn" aria-label="Spustit intro">&#9654;</button>
+  </div>
+  <button id="intro-skip" aria-label="Přeskočit intro" style="display:none;">Přeskočit →</button>
+</div>
 
 <nav id="main-nav">
   <div class="wrap">
@@ -692,9 +754,19 @@
       <li><a href="#o-kapele">O kapele</a></li>
       <li><a href="#terminy">Termíny</a></li>
       <li><a href="#ukazky">Ukázky</a></li>
-      <li><a href="#repertoar">Repertoár</a></li>
       <li><a href="#kontakt">Kontakt</a></li>
     </ul>
+    <div class="nav-socials" id="nav-socials">
+      <a id="nav-fb" href="https://www.facebook.com/profile.php?id=100066758199767&locale=cs_CZ" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+      </a>
+      <a id="nav-ig" href="https://www.instagram.com/harlejrevivalolomouc/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg>
+      </a>
+      <a id="nav-yt" href="https://www.youtube.com/@harlejrevivalolomouc393" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 00-1.95 1.96A29 29 0 001 12a29 29 0 00.46 5.58A2.78 2.78 0 003.41 19.54C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.96A29 29 0 0023 12a29 29 0 00-.46-5.58zM9.75 15.02V8.98L15.5 12l-5.75 3.02z"/></svg>
+      </a>
+    </div>
     <a class="navcta" href="#kontakt">Poptat termín</a>
     <button class="hamburger" aria-label="Otevřít menu" aria-expanded="false" aria-controls="mobile-menu">
       <span></span><span></span><span></span>
@@ -705,9 +777,19 @@
       <li><a href="#o-kapele">O kapele</a></li>
       <li><a href="#terminy">Termíny</a></li>
       <li><a href="#ukazky">Ukázky</a></li>
-      <li><a href="#repertoar">Repertoár</a></li>
       <li><a href="#kontakt">Kontakt</a></li>
     </ul>
+    <div class="mob-socials">
+      <a id="mob-fb" href="https://www.facebook.com/profile.php?id=100066758199767&locale=cs_CZ" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+      </a>
+      <a id="mob-ig" href="https://www.instagram.com/harlejrevivalolomouc/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg>
+      </a>
+      <a id="mob-yt" href="https://www.youtube.com/@harlejrevivalolomouc393" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 00-1.95 1.96A29 29 0 001 12a29 29 0 00.46 5.58A2.78 2.78 0 003.41 19.54C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.96A29 29 0 0023 12a29 29 0 00-.46-5.58zM9.75 15.02V8.98L15.5 12l-5.75 3.02z"/></svg>
+      </a>
+    </div>
     <a class="mob-cta" href="#kontakt">Poptat termín</a>
   </div>
 </nav>
@@ -716,12 +798,11 @@
   <div class="wrap">
     <div class="hero-inner">
       <div class="hero-text">
-        <div class="eyebrow">jediná revivalová skupina harlej v čr</div>
-        <h1 class="title">PĚT CHLAPŮ.<br>JEDNA <span class="accent">PARTA.</span><br>VŠECHNY PECKY.</h1>
-        <p class="subhead">Hrajeme to nejlepší z Harleje s energií, náloží a upřímnou úctou k originálu — a mezi songy vám prozradíme i pár věcí, co jste o kapele možná nevěděli.</p>
+        <div class="eyebrow" id="hero-eyebrow">jediná revivalová skupina harlej v čr</div>
+        <h1 class="title" id="hero-title">PĚT CHLAPŮ.<br>JEDNA <span class="accent">PARTA.</span><br>VŠECHNY PECKY.</h1>
+        <p class="subhead" id="hero-subhead">Hrajeme to nejlepší z Harleje s energií, náloží a upřímnou úctou k originálu — a mezi songy vám prozradíme i pár věcí, co jste o kapele možná nevěděli.</p>
         <div class="cta-row">
-          <a class="btn btn-solid" href="#kontakt">Poptat vystoupení</a>
-          <a class="btn btn-ghost" href="#ukazky">Ukázky z akcí</a>
+          <a class="btn btn-solid" href="#kontakt" id="hero-cta">Poptat vystoupení</a>
         </div>
       </div>
       <div class="hero-photo reveal">
@@ -737,33 +818,30 @@
 
 <section class="section-paper" id="o-kapele">
   <div class="wrap">
-    <div class="kicker reveal">o kapele</div>
-    <h2 class="h2 reveal" style="--reveal-delay:80ms">Pět pohodářů,<br>co to nehrajou na půl plynu.</h2>
-    <p class="lede reveal" style="--reveal-delay:160ms">Máte rádi Harlej? My taky — a to natolik, že jsme se rozhodli založit jejich revival. Na pódiu si dáváme záležet nejen na muzice, ale i na show: pár kostýmních narážek, historky o originální kapele a energie, která nedovolí nikomu jen tak postávat u piva.</p>
+    <div class="kicker reveal" id="about-kicker">o kapele</div>
+    <h2 class="h2 reveal" id="about-heading" style="--reveal-delay:80ms">Pět pohodářů,<br>co to nehrajou na půl plynu.</h2>
+    <p class="lede reveal" id="about-lede" style="--reveal-delay:160ms">Máte rádi Harlej? My taky — a to natolik, že jsme se rozhodli založit jejich revival. Na pódiu si dáváme záležet nejen na muzice, ale i na show: pár kostýmních narážek, historky o originální kapele a energie, která nedovolí nikomu jen tak postávat u piva.</p>
 
-    <div class="about-grid reveal" style="--reveal-delay:240ms">
-      <div>
-        <div class="roster" id="roster"></div>
+    <div class="about-intro reveal" style="--reveal-delay:200ms">
+      <div class="ref-row" id="about-tags" style="margin-top:0;">
+        <span>Festivaly</span>
+        <span>Městské slavnosti</span>
+        <span>Předvánoční programy</span>
+        <span>Plesy a oslavy</span>
       </div>
-      <div>
-        <div class="ref-row" style="margin-top:0;">
-          <span>Festivaly</span>
-          <span>Městské slavnosti</span>
-          <span>Předvánoční programy</span>
-          <span>Plesy a oslavy</span>
-        </div>
-        <p class="lede" style="margin-top:22px;">Vystupujeme po celé ČR — od menších náměstí po revival festivaly s dalšími kapelami na pódiu.</p>
-      </div>
+      <p class="lede" id="about-tagline" style="margin-top:0;">Vystupujeme po celé ČR — od menších náměstí po revival festivaly s dalšími kapelami na pódiu.</p>
     </div>
+
+    <div class="roster reveal" id="roster" style="--reveal-delay:320ms"></div>
   </div>
 </section>
 <div class="torn flip section-paper"></div>
 
 <section id="terminy">
   <div class="wrap">
-    <div class="kicker reveal">kde nás najdete</div>
-    <h2 class="h2 reveal" style="--reveal-delay:80ms">Nadcházející<br>vystoupení.</h2>
-    <p class="lede reveal" style="--reveal-delay:160ms">Přijďte si zazpívat naživo — sledujte termíny a rezervujte si místo včas.</p>
+    <div class="kicker reveal" id="gigs-kicker">kde nás najdete</div>
+    <h2 class="h2 reveal" id="gigs-heading" style="--reveal-delay:80ms">Nadcházející<br>vystoupení.</h2>
+    <p class="lede reveal" id="gigs-lede" style="--reveal-delay:160ms">Přijďte si zazpívat naživo — sledujte termíny a rezervujte si místo včas.</p>
     <div class="gigs-list reveal" style="--reveal-delay:260ms" id="gigs-list">
       <div class="gigs-empty">Načítám termíny…</div>
     </div>
@@ -773,98 +851,21 @@
 
 <section class="section-paper" id="ukazky">
   <div class="wrap">
-    <div class="kicker reveal">ukázky z akcí</div>
-    <h2 class="h2 reveal" style="--reveal-delay:80ms">Neradi mluvíme.<br>Radši to pustíme.</h2>
-    <p class="lede reveal" style="--reveal-delay:160ms">Krátké sestřihy přímo z koncertů — atmosféra, publikum a pár momentů, které se prostě musí vidět.</p>
-
-    <div class="reels reveal" style="--reveal-delay:240ms" id="reels">
-      <div class="reel-card reel-skeleton">
-        <div class="caption">Načítám videa z Facebooku…</div>
-      </div>
-    </div>
-    <p class="lede" id="reels-status" style="margin-top:18px; font-family:'Space Mono',monospace; font-size:0.8rem; display:none;"></p>
+    <div class="kicker reveal" id="chorus-kicker">ukázky</div>
+    <h2 class="h2 reveal" id="chorus-heading" style="--reveal-delay:80ms">Pusť si to.</h2>
+    <p class="lede reveal" id="chorus-lede" style="--reveal-delay:160ms">Krátké ukázky z repertoáru — rovnou z nahrávky.</p>
+    <div class="chorus-grid reveal" style="--reveal-delay:260ms" id="chorus-grid"></div>
   </div>
 </section>
 <div class="torn flip section-paper"></div>
 
-<script>
-(function () {
-  const container = document.getElementById('reels');
-  const status = document.getElementById('reels-status');
-
-  function formatDate(iso) {
-    if (!iso) return '';
-    try {
-      return new Date(iso).toLocaleDateString('cs-CZ', { day: 'numeric', month: 'long', year: 'numeric' });
-    } catch (e) { return ''; }
-  }
-
-  function renderVideos(videos) {
-    container.innerHTML = '';
-    if (!videos || videos.length === 0) {
-      container.innerHTML = '<div class="reel-card"><div class="caption">Zatím žádná videa k zobrazení.</div></div>';
-      return;
-    }
-    videos.forEach((v) => {
-      const card = document.createElement('a');
-      card.className = 'reel-card';
-      card.href = v.permalinkUrl || '#';
-      card.target = '_blank';
-      card.rel = 'noopener noreferrer';
-      card.style.textDecoration = 'none';
-      if (v.thumbnail) {
-        card.style.backgroundImage = `url('${v.thumbnail}')`;
-        card.style.backgroundSize = 'cover';
-        card.style.backgroundPosition = 'center';
-      }
-      card.innerHTML = `
-        <div class="play">&#9654;</div>
-        <div class="caption" style="font-size:0.85rem; color:var(--paper);">${v.title || 'Video z Facebooku'}</div>
-        <div class="caption">${formatDate(v.createdTime)}</div>
-      `;
-      container.appendChild(card);
-    });
-  }
-
-  fetch('/api/videos')
-    .then((r) => r.json())
-    .then((data) => {
-      renderVideos(data.videos);
-      if (data.error) {
-        status.style.display = 'block';
-        status.textContent = 'Poznámka: poslední pokus o načtení z Facebooku selhal, zobrazují se poslední známá videa.';
-      }
-    })
-    .catch(() => {
-      container.innerHTML = '<div class="reel-card"><div class="caption">Videa se teď nepodařilo načíst. Zkuste to prosím později.</div></div>';
-    });
-})();
-</script>
-
-<section id="repertoar">
-  <div class="wrap">
-    <div class="kicker reveal">repertoár</div>
-    <h2 class="h2 reveal" style="--reveal-delay:80ms">Výběr z toho nejlepšího.</h2>
-    <p class="lede reveal" style="--reveal-delay:160ms">Program stavíme tak, aby gradoval — a přesně vygradoval k největším hitům.</p>
-
-    <div class="ticket reveal" style="--reveal-delay:260ms">
-      <div class="ticket-main">
-        <div class="kicker" style="color:var(--amber);">setlist &middot; ukázka</div>
-        <ul class="setlist" id="setlist"></ul>
-      </div>
-      <div class="ticket-stub" id="ticket-stub"></div>
-    </div>
-  </div>
-</section>
-<div class="torn"></div>
-
 <footer id="kontakt">
   <div class="wrap">
-    <div class="kicker reveal">kontakt &amp; booking</div>
-    <h2 class="h2 reveal" style="--reveal-delay:80ms; margin-bottom:36px;">Máte termín?<br>Pojďme ho zaplnit.</h2>
+    <div class="kicker reveal" id="contact-kicker">kontakt</div>
+    <h2 class="h2 reveal" id="contact-heading" style="--reveal-delay:80ms; margin-bottom:36px;">Máte termín?<br>Pojďme ho zaplnit.</h2>
 
     <div class="contact-grid reveal" style="--reveal-delay:180ms">
-      <div class="contact-block" id="contact-booking"></div>
+      <div class="contact-block" id="contact-direct"></div>
       <div class="contact-block" id="contact-social"></div>
     </div>
 
@@ -883,6 +884,9 @@
       .replace(/&/g, '&amp;').replace(/</g, '&lt;')
       .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
   }
+  function escNl(s) { return esc(s).replace(/\n/g, '<br>'); }
+  function setText(id, val) { var el = document.getElementById(id); if (el && val) el.textContent = val; }
+  function setHTML(id, val) { var el = document.getElementById(id); if (el && val) el.innerHTML = val; }
   function safeHref(h) {
     if (!h || typeof h !== 'string') return '#';
     var t = h.trim();
@@ -890,6 +894,50 @@
   }
 
   fetch('/api/content').then(function (r) { return r.json(); }).then(function (d) {
+
+    if (d.hero) {
+      var h = d.hero;
+      setText('hero-eyebrow', h.eyebrow);
+      setText('hero-subhead', h.subhead);
+      setText('hero-cta', h.ctaLabel);
+      if (h.titleLines) {
+        var lines = h.titleLines.map(function (l) {
+          var e = esc(l);
+          if (h.titleAccent && l.indexOf(h.titleAccent) !== -1)
+            e = e.replace(esc(h.titleAccent), '<span class="accent">' + esc(h.titleAccent) + '</span>');
+          return e;
+        });
+        setHTML('hero-title', lines.join('<br>'));
+      }
+    }
+
+    if (d.about) {
+      var a = d.about;
+      setText('about-kicker', a.kicker);
+      setHTML('about-heading', escNl(a.heading));
+      setText('about-lede', a.lede);
+      setText('about-tagline', a.tagline);
+      if (a.tags) setHTML('about-tags', a.tags.map(function (t) { return '<span>' + esc(t) + '</span>'; }).join(''));
+    }
+
+    if (d.gigsSection) {
+      setText('gigs-kicker', d.gigsSection.kicker);
+      setHTML('gigs-heading', escNl(d.gigsSection.heading));
+      setText('gigs-lede', d.gigsSection.lede);
+    }
+
+    if (d.chorusSection) {
+      setText('chorus-kicker', d.chorusSection.kicker);
+      setHTML('chorus-heading', escNl(d.chorusSection.heading));
+      setText('chorus-lede', d.chorusSection.lede);
+    }
+
+    if (d.contactSection) {
+      setText('contact-kicker', d.contactSection.kicker);
+      setHTML('contact-heading', escNl(d.contactSection.heading));
+    }
+
+
     var ss = document.getElementById('stat-strip');
     if (ss && d.stats) {
       ss.innerHTML = d.stats.map(function (s) {
@@ -900,44 +948,63 @@
     var ro = document.getElementById('roster');
     if (ro && d.roster) {
       ro.innerHTML = d.roster.map(function (m) {
-        return '<div><div class="role">' + esc(m.role) + '</div><div class="desc">' + esc(m.desc) + '</div></div>';
+        var photo = m.photo ? '<img class="member-photo" src="' + esc(m.photo) + '" alt="' + esc(m.role) + '" loading="lazy">' : '';
+        return '<div class="member-card">' + photo + '<div class="member-info"><div class="role">' + esc(m.role) + '</div>' + (m.desc ? '<div class="desc">' + esc(m.desc) + '</div>' : '') + '</div></div>';
       }).join('');
     }
 
-    var sl = document.getElementById('setlist');
-    if (sl && d.setlist) {
-      sl.innerHTML = d.setlist.map(function (s) {
-        return '<li><b>' + esc(s.num) + '</b>  ' + esc(s.title) + '</li>';
-      }).join('');
+    var cg = document.getElementById('chorus-grid');
+    if (cg) {
+      if (d.choruses && d.choruses.length) {
+        cg.innerHTML = d.choruses.map(function (c) {
+          var ext = (c.file || '').split('.').pop().toLowerCase();
+          var mime = ext === 'mp3' ? 'audio/mpeg' : ext === 'ogg' ? 'audio/ogg' : 'audio/wav';
+          return '<div class="chorus-card">' +
+            '<div class="chorus-title">' + esc(c.title) + '</div>' +
+            '<audio controls preload="none"><source src="/audio/' + esc(c.file) + '" type="' + mime + '"></audio>' +
+            '</div>';
+        }).join('');
+      } else {
+        cg.innerHTML = '<div class="chorus-empty">Zatím žádné ukázky.</div>';
+      }
     }
 
-    var ts = document.getElementById('ticket-stub');
-    if (ts && d.showInfo) {
-      ts.innerHTML =
-        '<div class="lbl">Délka show</div>' +
-        '<div class="val">' + esc(d.showInfo.duration) + '</div>' +
-        '<div class="lbl" style="margin-top:14px;">Formát</div>' +
-        '<div class="val" style="font-size:1rem;">' + esc(d.showInfo.format) + '</div>';
-    }
 
-    var cb = document.getElementById('contact-booking');
-    if (cb && d.contact) {
+    if (d.contact) {
       var c = d.contact;
-      cb.innerHTML =
-        '<div class="lbl3">Booking</div>' +
-        '<a class="line" href="' + safeHref(c.bookingHref) + '">' + esc(c.bookingLabel) + ' →</a>' +
-        '<a class="line" href="' + safeHref(c.emailHref) + '">' + esc(c.emailLabel) + ' →</a>' +
-        '<a class="line" href="' + safeHref(c.phoneHref) + '">' + esc(c.phoneLabel) + ' →</a>';
-    }
 
-    var cs = document.getElementById('contact-social');
-    if (cs && d.contact) {
-      var c = d.contact;
-      cs.innerHTML =
-        '<div class="lbl3">Sociální sítě</div>' +
-        '<a class="line" href="' + safeHref(c.facebookHref) + '" target="_blank" rel="noopener noreferrer">Facebook →</a>' +
-        '<a class="line" href="' + safeHref(c.instagramHref) + '" target="_blank" rel="noopener noreferrer">Instagram →</a>' +
-        '<a class="line" href="' + safeHref(c.youtubeHref) + '" target="_blank" rel="noopener noreferrer">YouTube →</a>';
+      // Nav social icon hrefs
+      ['fb','ig','yt'].forEach(function(k) {
+        var keys = {fb:'facebookHref', ig:'instagramHref', yt:'youtubeHref'};
+        var nav = document.getElementById('nav-' + k);
+        var mob = document.getElementById('mob-' + k);
+        var href = safeHref(c[keys[k]]);
+        if (nav) nav.href = href;
+        if (mob) mob.href = href;
+      });
+
+      // Direct contact (email / phone)
+      var cd = document.getElementById('contact-direct');
+      if (cd) {
+        var hasEmail = c.emailHref && c.emailHref !== '#';
+        var hasPhone = c.phoneHref && c.phoneHref !== '#';
+        if (hasEmail || hasPhone) {
+          var dhtml = '<div class="lbl3">Přímý kontakt</div>';
+          if (hasEmail) dhtml += '<a class="line" href="' + safeHref(c.emailHref) + '">' + esc(c.emailLabel || 'E-mail') + ' →</a>';
+          if (hasPhone) dhtml += '<a class="line" href="' + safeHref(c.phoneHref) + '">' + esc(c.phoneLabel || 'Telefon') + ' →</a>';
+          cd.innerHTML = dhtml;
+        }
+      }
+
+      // Social links
+      var cs = document.getElementById('contact-social');
+      if (cs) {
+        cs.innerHTML =
+          '<div class="lbl3">Sociální sítě</div>' +
+          '<a class="line" href="' + safeHref(c.facebookHref) + '" target="_blank" rel="noopener noreferrer">Facebook →</a>' +
+          '<a class="line" href="' + safeHref(c.instagramHref) + '" target="_blank" rel="noopener noreferrer">Instagram →</a>' +
+          '<a class="line" href="' + safeHref(c.youtubeHref) + '" target="_blank" rel="noopener noreferrer">YouTube →</a>';
+      }
     }
 
     var gl = document.getElementById('gigs-list');
@@ -1017,6 +1084,44 @@
   }, { threshold: 0.12 });
   document.querySelectorAll('.reveal').forEach(function (el) {
     observer.observe(el);
+  });
+})();
+</script>
+
+<script>
+(function () {
+  var SESSION_KEY = 'hr_intro_seen';
+  var overlay = document.getElementById('intro-overlay');
+
+  function dismiss() {
+    document.body.classList.remove('intro-active');
+    overlay.classList.add('is-leaving');
+    setTimeout(function () { overlay.remove(); }, 850);
+  }
+
+  if (sessionStorage.getItem(SESSION_KEY) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    overlay.remove();
+    return;
+  }
+
+  document.body.classList.add('intro-active');
+  sessionStorage.setItem(SESSION_KEY, '1');
+
+  var video = document.getElementById('intro-video');
+  var enterEl = document.getElementById('intro-enter');
+  var playBtn = document.getElementById('intro-play-btn');
+  var skipBtn = document.getElementById('intro-skip');
+
+  video.addEventListener('ended', dismiss);
+  skipBtn.addEventListener('click', dismiss);
+  video.addEventListener('error', dismiss);
+
+  playBtn.addEventListener('click', function () {
+    video.muted = false;
+    video.play().catch(function () { video.muted = true; video.play(); });
+    enterEl.classList.add('is-leaving');
+    setTimeout(function () { enterEl.remove(); }, 450);
+    skipBtn.style.display = '';
   });
 })();
 </script>
