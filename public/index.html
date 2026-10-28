@@ -1001,11 +1001,9 @@
       // CTA tlačítka email + telefon
       var cta = document.getElementById('contact-cta');
       if (cta) {
-        var hasEmail = c.emailHref && c.emailHref !== '#';
-        var hasPhone = c.phoneHref && c.phoneHref !== '#';
         var ctaHtml = '';
-        if (hasEmail) ctaHtml += '<a class="contact-cta-btn" href="' + safeHref(c.emailHref) + '">' + esc(c.emailLabel || 'E-mail') + ' →</a>';
-        if (hasPhone) ctaHtml += '<a class="contact-cta-btn" href="' + safeHref(c.phoneHref) + '">' + esc(c.phoneLabel || 'Telefon') + ' →</a>';
+        if (c.emailLabel && c.emailLabel !== 'E-mail') ctaHtml += '<div class="contact-cta-btn">' + esc(c.emailLabel) + '</div>';
+        if (c.phoneLabel && c.phoneLabel !== 'Telefon') ctaHtml += '<div class="contact-cta-btn">' + esc(c.phoneLabel) + '</div>';
         if (ctaHtml) cta.innerHTML = ctaHtml;
       }
 
