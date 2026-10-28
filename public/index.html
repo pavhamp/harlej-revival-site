@@ -606,40 +606,54 @@
   }
 
   /* ---------- KONTAKT ---------- */
-  footer{
+  #kontakt{
     background:var(--ink);
     color:var(--paper);
-    padding:70px 0 40px;
+    padding:70px 0 64px;
   }
-  footer h2.h2{color:var(--paper);}
-  footer .kicker{color:var(--rust);}
-  .contact-grid{
-    display:grid;
-    grid-template-columns:1fr;
-    gap:40px;
+  #kontakt h2.h2{color:var(--paper);}
+  #kontakt .kicker{color:var(--rust);}
+  .contact-cta-row{
+    display:flex; flex-wrap:wrap; gap:16px;
+    margin-bottom:52px;
   }
-  @media(min-width:800px){ .contact-grid{grid-template-columns:1fr 1fr;} }
-  .contact-block .lbl3{
+  .contact-cta-btn{
+    display:inline-flex; align-items:center; gap:10px;
     font-family:'Space Mono', monospace;
-    font-size:0.7rem;
+    font-size:0.9rem;
+    letter-spacing:0.5px;
+    text-transform:uppercase;
+    text-decoration:none;
+    color:var(--paper);
+    border:1px solid var(--line);
+    padding:18px 28px;
+    transition:border-color .15s, color .15s, background .15s;
+  }
+  .contact-cta-btn:hover{border-color:var(--amber); color:var(--amber);}
+  .contact-social-strip{
+    display:flex; flex-wrap:wrap; gap:0;
+    border-top:1px solid var(--line);
+    padding-top:28px;
+  }
+  .contact-social-strip a{
+    font-family:'Space Mono', monospace;
+    font-size:0.78rem;
     letter-spacing:1.5px;
     text-transform:uppercase;
-    color:var(--rust);
-    margin-bottom:10px;
-  }
-  .contact-block a.line{
-    display:block;
     text-decoration:none;
-    font-size:1.05rem;
-    padding:10px 0;
-    border-bottom:1px solid var(--line);
-    color:var(--paper);
+    color:var(--paper-dim);
+    margin-right:28px;
+    padding-bottom:4px;
+    border-bottom:2px solid transparent;
+    transition:color .15s, border-color .15s;
   }
-  .contact-block a.line:hover{color:var(--amber);}
-  .foot-bottom{
-    margin-top:60px;
-    padding-top:24px;
+  .contact-social-strip a:hover{color:var(--amber); border-color:var(--amber);}
+  footer{
+    background:var(--ink);
     border-top:1px solid var(--line);
+    padding:20px 0;
+  }
+  .foot-bottom{
     display:flex; flex-wrap:wrap; justify-content:space-between; gap:10px;
     font-family:'Space Mono', monospace;
     font-size:0.72rem;
@@ -799,7 +813,7 @@
     <div class="hero-inner">
       <div class="hero-text">
         <div class="eyebrow" id="hero-eyebrow">jediná revivalová skupina harlej v čr</div>
-        <h1 class="title" id="hero-title">PĚT CHLAPŮ.<br>JEDNA <span class="accent">PARTA.</span><br>VŠECHNY PECKY.</h1>
+        <h1 class="title" id="hero-title">HARLEJ<br><span class="accent">REVIVAL.</span></h1>
         <p class="subhead" id="hero-subhead">Hrajeme to nejlepší z Harleje s energií, náloží a upřímnou úctou k originálu — a mezi songy vám prozradíme i pár věcí, co jste o kapele možná nevěděli.</p>
         <div class="cta-row">
           <a class="btn btn-solid" href="#kontakt" id="hero-cta">Poptat vystoupení</a>
@@ -818,7 +832,7 @@
 
 <section class="section-paper" id="o-kapele">
   <div class="wrap">
-    <div class="kicker reveal" id="about-kicker">o kapele</div>
+    <div class="kicker reveal" id="about-kicker">S úctou k originálu</div>
     <h2 class="h2 reveal" id="about-heading" style="--reveal-delay:80ms">Pět pohodářů,<br>co to nehrajou na půl plynu.</h2>
     <p class="lede reveal" id="about-lede" style="--reveal-delay:160ms">Máte rádi Harlej? My taky — a to natolik, že jsme se rozhodli založit jejich revival. Na pódiu si dáváme záležet nejen na muzice, ale i na show: pár kostýmních narážek, historky o originální kapele a energie, která nedovolí nikomu jen tak postávat u piva.</p>
 
@@ -859,16 +873,17 @@
 </section>
 <div class="torn flip section-paper"></div>
 
-<footer id="kontakt">
+<section id="kontakt">
   <div class="wrap">
     <div class="kicker reveal" id="contact-kicker">kontakt</div>
-    <h2 class="h2 reveal" id="contact-heading" style="--reveal-delay:80ms; margin-bottom:36px;">Máte termín?<br>Pojďme ho zaplnit.</h2>
+    <h2 class="h2 reveal" id="contact-heading" style="--reveal-delay:80ms; margin-bottom:40px;">Máte termín?<br>Pojďme ho zaplnit.</h2>
+    <div class="contact-cta-row reveal" style="--reveal-delay:160ms" id="contact-cta"></div>
+    <div class="contact-social-strip reveal" style="--reveal-delay:240ms" id="contact-social"></div>
+  </div>
+</section>
 
-    <div class="contact-grid reveal" style="--reveal-delay:180ms">
-      <div class="contact-block" id="contact-direct"></div>
-      <div class="contact-block" id="contact-social"></div>
-    </div>
-
+<footer>
+  <div class="wrap">
     <div class="foot-bottom">
       <span>&copy; Harlej Revival Olomouc</span>
       <span>Jediná revivalová skupina Harlej v ČR</span>
@@ -983,27 +998,24 @@
         if (mob) mob.href = href;
       });
 
-      // Direct contact (email / phone)
-      var cd = document.getElementById('contact-direct');
-      if (cd) {
+      // CTA tlačítka email + telefon
+      var cta = document.getElementById('contact-cta');
+      if (cta) {
         var hasEmail = c.emailHref && c.emailHref !== '#';
         var hasPhone = c.phoneHref && c.phoneHref !== '#';
-        if (hasEmail || hasPhone) {
-          var dhtml = '<div class="lbl3">Přímý kontakt</div>';
-          if (hasEmail) dhtml += '<a class="line" href="' + safeHref(c.emailHref) + '">' + esc(c.emailLabel || 'E-mail') + ' →</a>';
-          if (hasPhone) dhtml += '<a class="line" href="' + safeHref(c.phoneHref) + '">' + esc(c.phoneLabel || 'Telefon') + ' →</a>';
-          cd.innerHTML = dhtml;
-        }
+        var ctaHtml = '';
+        if (hasEmail) ctaHtml += '<a class="contact-cta-btn" href="' + safeHref(c.emailHref) + '">' + esc(c.emailLabel || 'E-mail') + ' →</a>';
+        if (hasPhone) ctaHtml += '<a class="contact-cta-btn" href="' + safeHref(c.phoneHref) + '">' + esc(c.phoneLabel || 'Telefon') + ' →</a>';
+        if (ctaHtml) cta.innerHTML = ctaHtml;
       }
 
-      // Social links
+      // Sociální sítě
       var cs = document.getElementById('contact-social');
       if (cs) {
         cs.innerHTML =
-          '<div class="lbl3">Sociální sítě</div>' +
-          '<a class="line" href="' + safeHref(c.facebookHref) + '" target="_blank" rel="noopener noreferrer">Facebook →</a>' +
-          '<a class="line" href="' + safeHref(c.instagramHref) + '" target="_blank" rel="noopener noreferrer">Instagram →</a>' +
-          '<a class="line" href="' + safeHref(c.youtubeHref) + '" target="_blank" rel="noopener noreferrer">YouTube →</a>';
+          '<a href="' + safeHref(c.facebookHref) + '" target="_blank" rel="noopener noreferrer">Facebook</a>' +
+          '<a href="' + safeHref(c.instagramHref) + '" target="_blank" rel="noopener noreferrer">Instagram</a>' +
+          '<a href="' + safeHref(c.youtubeHref) + '" target="_blank" rel="noopener noreferrer">YouTube</a>';
       }
     }
 

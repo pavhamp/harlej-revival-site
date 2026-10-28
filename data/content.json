@@ -1,13 +1,13 @@
 {
   "hero": {
     "eyebrow": "jediná revivalová skupina harlej v čr",
-    "titleLines": ["PĚT CHLAPŮ.", "JEDNA PARTA.", "VŠECHNY PECKY."],
-    "titleAccent": "PARTA.",
+    "titleLines": ["HARLEJ", "REVIVAL."],
+    "titleAccent": "REVIVAL.",
     "subhead": "Hrajeme to nejlepší z Harleje s energií, náloží a upřímnou úctou k originálu — a mezi songy vám prozradíme i pár věcí, co jste o kapele možná nevěděli.",
     "ctaLabel": "Poptat vystoupení"
   },
   "about": {
-    "kicker": "o kapele",
+    "kicker": "S úctou k originálu",
     "heading": "Pět pohodářů,\nco to nehrajou na půl plynu.",
     "lede": "Máte rádi Harlej? My taky — a to natolik, že jsme se rozhodli založit jejich revival. Na pódiu si dáváme záležet nejen na muzice, ale i na show: pár kostýmních narážek, historky o originální kapele a energie, která nedovolí nikomu jen tak postávat u piva.",
     "tags": ["Festivaly", "Městské slavnosti", "Předvánoční programy", "Plesy a oslavy"],
@@ -29,16 +29,16 @@
   },
   "stats": [
     {
-      "num": "90'",
-      "lbl": "min. délka show"
-    },
-    {
       "num": "100K+",
-      "lbl": "zhlédnutí reelu"
+      "lbl": "zhlédnutí na sítích"
     },
     {
-      "num": "5",
-      "lbl": "členů na pódiu"
+      "num": "ENERGIE",
+      "lbl": "poutavá show"
+    },
+    {
+      "num": "100%",
+      "lbl": "přirozenost"
     }
   ],
   "roster": [
