@@ -24,6 +24,11 @@ const MAX_VIDEOS = 8;
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "";
 const CONTENT_FILE = path.join(__dirname, "data", "content.json");
 
+const GITHUB_TOKEN = process.env.GITHUB_TOKEN || "";
+const GITHUB_REPO = process.env.GITHUB_REPO || "";
+const GITHUB_BRANCH = process.env.GITHUB_BRANCH || "master";
+const GITHUB_CONTENT_PATH = "data/content.json";
+
 if (!FB_PAGE_ID || !FB_PAGE_ACCESS_TOKEN) {
   console.warn(
     "[varovani] FACEBOOK_PAGE_ID nebo FACEBOOK_PAGE_ACCESS_TOKEN neni nastaveno v .env — endpoint /api/videos bude vracet prazdnou cache, dokud promenne nedoplnis."
@@ -159,6 +164,38 @@ app.post("/api/videos/refresh", async (req, res) => {
   res.json({ videos: cache.videos, lastUpdated: cache.lastUpdated, error: cache.lastError });
 });
 
+// --- GitHub sync ---
+
+async function commitToGitHub(data) {
+  const apiBase = `https://api.github.com/repos/${GITHUB_REPO}/contents/${GITHUB_CONTENT_PATH}`;
+  const headers = {
+    "Authorization": `Bearer ${GITHUB_TOKEN}`,
+    "Accept": "application/vnd.github+json",
+    "X-GitHub-Api-Version": "2022-11-28",
+    "Content-Type": "application/json",
+  };
+
+  const getRes = await fetch(`${apiBase}?ref=${GITHUB_BRANCH}`, { headers });
+  if (!getRes.ok) throw new Error(`GitHub GET ${getRes.status}`);
+  const { sha } = await getRes.json();
+
+  const content = Buffer.from(JSON.stringify(data, null, 2), "utf-8").toString("base64");
+  const putRes = await fetch(apiBase, {
+    method: "PUT",
+    headers,
+    body: JSON.stringify({
+      message: "Admin: aktualizovat obsah webu",
+      content,
+      sha,
+      branch: GITHUB_BRANCH,
+    }),
+  });
+  if (!putRes.ok) {
+    const err = await putRes.text();
+    throw new Error(`GitHub PUT ${putRes.status}: ${err}`);
+  }
+}
+
 // --- Content API ---
 
 app.get("/api/content", async (req, res) => {
@@ -174,6 +211,11 @@ app.post("/api/content", adminLimiter, requireAdminPassword, async (req, res) =>
   }
   try {
     await writeContent(body);
+    if (GITHUB_TOKEN && GITHUB_REPO) {
+      commitToGitHub(body).catch((err) =>
+        console.warn("[github] Sync selhal:", err.message)
+      );
+    }
     res.json({ ok: true });
   } catch (err) {
     res.status(500).json({ error: err.message });
