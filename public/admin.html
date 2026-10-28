@@ -331,7 +331,7 @@
     <div class="login-title">Admin panel</div>
     <label class="field-label" for="pw-input">Heslo</label>
     <input class="input" type="password" id="pw-input" placeholder="Zadejte heslo" autocomplete="current-password">
-    <button class="btn-primary" id="login-btn" onclick="tryLogin()">Přihlásit se</button>
+    <button class="btn-primary" id="login-btn">Přihlásit se</button>
     <div class="login-error" id="login-error"></div>
   </div>
 </div>
@@ -342,8 +342,8 @@
     <div class="header-title">Harlej <span>Revival</span> — Admin</div>
     <div class="header-right">
       <span class="save-status" id="save-status"></span>
-      <button class="btn-save" id="save-btn" onclick="saveContent()">Uložit vše</button>
-      <button class="btn-logout" onclick="logout()">Odhlásit</button>
+      <button class="btn-save" id="save-btn">Uložit vše</button>
+      <button class="btn-logout" id="logout-btn">Odhlásit</button>
     </div>
   </header>
 
@@ -394,7 +394,7 @@
       <div class="field-group">
         <label class="field-label">Tagy (typy akcí)</label>
         <div id="about-tags-container"></div>
-        <button class="btn-add" onclick="addTagRow()" style="margin-top:6px;">+ Přidat tag</button>
+        <button class="btn-add" id="add-tag-btn" style="margin-top:6px;">+ Přidat tag</button>
       </div>
       <div class="field-group">
         <label class="field-label" for="about-tagline-inp">Doplňující věta (pod tagy)</label>
@@ -463,7 +463,7 @@
     <div class="section">
       <div class="section-title">Členové kapely</div>
       <div id="roster-container"></div>
-      <button class="btn-add" onclick="addRosterRow()">+ Přidat člena</button>
+      <button class="btn-add" id="add-roster-btn">+ Přidat člena</button>
     </div>
 
     <!-- TERMÍNY -->
@@ -479,7 +479,7 @@
       <div class="field-group" style="margin-top:10px;">
         <label class="field-label" for="gig-ticket-note" style="font-size:0.65rem; color:var(--paper-dim);">Odkaz na akci je volitelný — pokud zůstane prázdný, tlačítko se nezobrazí</label>
       </div>
-      <button class="btn-add" onclick="addGigRow()">+ Přidat termín</button>
+      <button class="btn-add" id="add-gig-btn">+ Přidat termín</button>
     </div>
 
     <!-- UKÁZKY -->
@@ -491,7 +491,7 @@
         <div></div>
       </div>
       <div id="chorus-container"></div>
-      <button class="btn-add" onclick="addChorusRow()">+ Přidat ukázku</button>
+      <button class="btn-add" id="add-chorus-btn">+ Přidat ukázku</button>
       <p style="margin-top:12px; font-size:0.72rem; color:var(--paper-dim); font-family:'Space Mono',monospace; line-height:1.5;">
         Soubory nahraj ručně do složky <code style="color:var(--amber);">public/audio/</code> na serveru.
       </p>
@@ -555,8 +555,28 @@ let currentPassword = '';
     verifyAndLoad();
   }
 
+  document.getElementById('login-btn').addEventListener('click', tryLogin);
   document.getElementById('pw-input').addEventListener('keydown', function (e) {
     if (e.key === 'Enter') tryLogin();
+  });
+
+  document.getElementById('save-btn').addEventListener('click', saveContent);
+  document.getElementById('logout-btn').addEventListener('click', logout);
+  document.getElementById('add-tag-btn').addEventListener('click', function () { addTagRow(); });
+  document.getElementById('add-roster-btn').addEventListener('click', function () { addRosterRow(); });
+  document.getElementById('add-gig-btn').addEventListener('click', function () { addGigRow(); });
+  document.getElementById('add-chorus-btn').addEventListener('click', function () { addChorusRow(); });
+
+  // Event delegace pro tlačítka "odebrat" v dynamicky přidaných řadách
+  document.addEventListener('click', function (e) {
+    var btn = e.target.closest('.btn-remove');
+    if (!btn) return;
+    var row = btn.closest('.row') || btn.closest('.gig-row-admin');
+    if (row) {
+      var inSetlist = !!btn.dataset.setlist;
+      row.remove();
+      if (inSetlist) updateSetlistNumbers();
+    }
   });
 })();
 
@@ -718,7 +738,7 @@ function addRosterRow(role, desc) {
   row.innerHTML =
     '<input class="input role-input" style="max-width:160px" placeholder="Role (Zpěv…)" value="' + ea(role) + '">' +
     '<input class="input desc-input" placeholder="Stručný popis" value="' + ea(desc) + '">' +
-    '<button class="btn-remove" title="Odebrat" onclick="this.closest(\'.row\').remove()">×</button>';
+    '<button class="btn-remove" title="Odebrat">×</button>';
   container.appendChild(row);
 }
 
@@ -731,7 +751,7 @@ function addSetlistRow(title) {
   row.innerHTML =
     '<span class="row-num">??</span>' +
     '<input class="input title-input" placeholder="Název písně" value="' + ea(title) + '">' +
-    '<button class="btn-remove" title="Odebrat" onclick="removeSetlistRow(this)">×</button>';
+    '<button class="btn-remove" data-setlist="1" title="Odebrat">×</button>';
   container.appendChild(row);
   updateSetlistNumbers();
 }
@@ -758,7 +778,7 @@ function addGigRow(date, venue, city, ticketHref) {
     '<input class="input gig-date-input" type="date" value="' + ea(date) + '">' +
     '<input class="input gig-city-input" placeholder="Obec" value="' + ea(city) + '">' +
     '<input class="input gig-venue-input" placeholder="Název akce (volitelné)" value="' + ea(venue) + '">' +
-    '<button class="btn-remove" title="Odebrat" onclick="this.closest(\'.gig-row-admin\').remove()">×</button>' +
+    '<button class="btn-remove" title="Odebrat">×</button>' +
     '<input class="input gig-ticket-input" placeholder="Odkaz na akci — URL (volitelné)" value="' + ea(ticketHref) + '" style="grid-column:1/4; margin-top:-4px;">';
   container.appendChild(row);
 }
@@ -771,7 +791,7 @@ function addTagRow(val) {
   row.className = 'row';
   row.innerHTML =
     '<input class="input tag-input" placeholder="např. Festivaly" value="' + ea(val) + '">' +
-    '<button class="btn-remove" title="Odebrat" onclick="this.closest(\'.row\').remove()">×</button>';
+    '<button class="btn-remove" title="Odebrat">×</button>';
   container.appendChild(row);
 }
 
@@ -785,7 +805,7 @@ function addChorusRow(title, file) {
   row.innerHTML =
     '<input class="input chorus-title-input" placeholder="Název skladby" value="' + ea(title) + '">' +
     '<input class="input chorus-file-input" placeholder="soubor.wav" value="' + ea(file) + '">' +
-    '<button class="btn-remove" title="Odebrat" onclick="this.closest(\'.row\').remove()">×</button>';
+    '<button class="btn-remove" title="Odebrat">×</button>';
   container.appendChild(row);
 }
 
