@@ -695,7 +695,7 @@ function populateForm(data) {
   // Roster
   const rc = document.getElementById('roster-container');
   rc.innerHTML = '';
-  (data.roster || []).forEach(function (m) { addRosterRow(m.role, m.desc); });
+  (data.roster || []).forEach(function (m) { addRosterRow(m.role, m.desc, m.photo); });
 
   // Gigs
   var gc = document.getElementById('gigs-container');
@@ -730,14 +730,15 @@ function addStatRow(num, lbl) {
 }
 
 // --- ROSTER ROWS ---
-function addRosterRow(role, desc) {
-  role = role || ''; desc = desc || '';
+function addRosterRow(role, desc, photo) {
+  role = role || ''; desc = desc || ''; photo = photo || '';
   const container = document.getElementById('roster-container');
   const row = document.createElement('div');
   row.className = 'row';
   row.innerHTML =
     '<input class="input role-input" style="max-width:160px" placeholder="Role (Zpěv…)" value="' + ea(role) + '">' +
     '<input class="input desc-input" placeholder="Stručný popis" value="' + ea(desc) + '">' +
+    '<input type="hidden" class="photo-input" value="' + ea(photo) + '">' +
     '<button class="btn-remove" title="Odebrat">×</button>';
   container.appendChild(row);
 }
@@ -823,7 +824,8 @@ function collectData() {
   document.querySelectorAll('#roster-container .row').forEach(function (row) {
     var role = row.querySelector('.role-input').value.trim();
     var desc = row.querySelector('.desc-input').value.trim();
-    if (role || desc) roster.push({ role: role, desc: desc });
+    var photo = row.querySelector('.photo-input') ? row.querySelector('.photo-input').value.trim() : '';
+    if (role || desc) roster.push({ role: role, desc: desc, photo: photo });
   });
 
   var gigs = [];
