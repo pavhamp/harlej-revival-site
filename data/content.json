@@ -1,16 +1,25 @@
 {
   "hero": {
     "eyebrow": "jediná revivalová skupina harlej v čr",
-    "titleLines": ["HARLEJ", "REVIVAL."],
+    "titleLines": [
+      "HARLEJ",
+      "REVIVAL.",
+      ""
+    ],
     "titleAccent": "REVIVAL.",
     "subhead": "Hrajeme to nejlepší z Harleje s energií, náloží a upřímnou úctou k originálu — a mezi songy vám prozradíme i pár věcí, co jste o kapele možná nevěděli.",
     "ctaLabel": "Poptat vystoupení"
   },
   "about": {
-    "kicker": "S úctou k originálu",
-    "heading": "Pět pohodářů,\nco to nehrajou na půl plynu.",
+    "kicker": "O kapele",
+    "heading": "S úctou k originálu",
     "lede": "Máte rádi Harlej? My taky — a to natolik, že jsme se rozhodli založit jejich revival. Na pódiu si dáváme záležet nejen na muzice, ale i na show: pár kostýmních narážek, historky o originální kapele a energie, která nedovolí nikomu jen tak postávat u piva.",
-    "tags": ["Festivaly", "Městské slavnosti", "Předvánoční programy", "Plesy a oslavy"],
+    "tags": [
+      "Festivaly",
+      "Městské slavnosti",
+      "Předvánoční programy",
+      "Plesy a oslavy"
+    ],
     "tagline": "Vystupujeme po celé ČR — od menších náměstí po revival festivaly s dalšími kapelami na pódiu."
   },
   "gigsSection": {
@@ -67,31 +76,6 @@
       "desc": "",
       "photo": "/img/kytara2.jpg"
     }
-  ],
-  "setlist": [
-    { "num": "01", "title": "Zfetovanej" },
-    { "num": "02", "title": "Volání krve" },
-    { "num": "03", "title": "Balada o tom jak si chlapec pod vlivem měkké drogy našel děvče s nízkým IQ" },
-    { "num": "04", "title": "Dětský hřiště" },
-    { "num": "05", "title": "Až tady jednou nebudu" },
-    { "num": "06", "title": "Pověste ho vejš" },
-    { "num": "07", "title": "Tak mi zavolej" },
-    { "num": "08", "title": "Proč pocit mám" },
-    { "num": "09", "title": "Tráva" },
-    { "num": "10", "title": "Abstinent" },
-    { "num": "11", "title": "Smutku dávám sbohem" },
-    { "num": "12", "title": "Malá nevěrná holka" },
-    { "num": "13", "title": "Z Cuby kiwi" },
-    { "num": "14", "title": "Možná" },
-    { "num": "15", "title": "Strážní andělé" },
-    { "num": "16", "title": "Kulisácká" },
-    { "num": "17", "title": "Na Prodej" },
-    { "num": "18", "title": "Svařák" },
-    { "num": "19", "title": "Nejsem zklamanej" },
-    { "num": "20", "title": "Přirození" },
-    { "num": "21", "title": "Brikety" },
-    { "num": "22", "title": "Jsou chvíle" },
-    { "num": "23", "title": "Můžeš mít" }
   ],
   "gigs": [
     {
@@ -216,14 +200,19 @@
     }
   ],
   "choruses": [
-    { "title": "Až tady jednou nebudu", "file": "aztadyjednounebudu.wav" },
-    { "title": "Proč pocit mám", "file": "procpocitmam.wav" },
-    { "title": "Tráva", "file": "trava.wav" }
+    {
+      "title": "Až tady jednou nebudu",
+      "file": "aztadyjednounebudu.wav"
+    },
+    {
+      "title": "Proč pocit mám",
+      "file": "procpocitmam.wav"
+    },
+    {
+      "title": "Tráva",
+      "file": "trava.wav"
+    }
   ],
-  "showInfo": {
-    "duration": "až 90 min",
-    "format": "sólo i vedle dalších kapel"
-  },
   "contact": {
     "emailLabel": "MartinMessi10@seznam.cz",
     "emailHref": "#",
