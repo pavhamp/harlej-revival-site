@@ -1,5 +1,7 @@
 # Harlej Revival Olomouc — web
 
+> **Hosting VEDOS:** návod k nasazení je v [VEDOS.md](VEDOS.md). Na VEDOS běží web bez Node.js (statické soubory + PHP pro admin).
+
 Node.js/Express web s admin panelem a napojením na Facebook Graph API.
 
 ## Požadavky
@@ -81,10 +83,12 @@ harlej-revival-site/
 ├── server.js              Express server, Graph API sync, admin API
 ├── package.json
 ├── .env                   Lokální konfigurace (nesdílet, není v gitu)
-├── data/
-│   └── content.json       Obsah webu (setlist, termíny, kontakt…)
 ├── pictures/              Originální fotky
-└── public/
+└── public/               (tohle se nahrává na VEDOS)
+    ├── .htaccess          Nastavení serveru pro VEDOS
+    ├── api/               PHP pro admin panel (content.php, verify.php)
+    ├── data/content.json  Výchozí obsah webu (setlist, termíny, kontakt…)
+    ├── storage/           Obsah uložený z adminu (na serveru, mimo git)
     ├── index.html         Hlavní stránka
     ├── admin.html         Admin panel
     ├── 404.html           Stránka pro nenalezené URL

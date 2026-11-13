@@ -22,12 +22,14 @@ const REFRESH_INTERVAL_MS = 10 * 60 * 1000;
 const MAX_VIDEOS = 8;
 
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "";
-const CONTENT_FILE = path.join(__dirname, "data", "content.json");
+// výchozí obsah (je v gitu) a obsah uložený z adminu (mimo git, jako storage/ na VEDOS)
+const DEFAULT_CONTENT_FILE = path.join(__dirname, "public", "data", "content.json");
+const CONTENT_FILE = path.join(__dirname, "storage", "content.json");
 
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN || "";
 const GITHUB_REPO = process.env.GITHUB_REPO || "";
 const GITHUB_BRANCH = process.env.GITHUB_BRANCH || "master";
-const GITHUB_CONTENT_PATH = "data/content.json";
+const GITHUB_CONTENT_PATH = "public/data/content.json";
 
 if (!FB_PAGE_ID || !FB_PAGE_ACCESS_TOKEN) {
   console.warn(
@@ -94,12 +96,12 @@ fetchVideosFromFacebook();
 setInterval(fetchVideosFromFacebook, REFRESH_INTERVAL_MS);
 
 async function readContent() {
-  try {
-    const raw = await readFile(CONTENT_FILE, "utf-8");
-    return JSON.parse(raw);
-  } catch {
-    return null;
+  for (const file of [CONTENT_FILE, DEFAULT_CONTENT_FILE]) {
+    try {
+      return JSON.parse(await readFile(file, "utf-8"));
+    } catch {}
   }
+  return null;
 }
 
 async function writeContent(data) {
@@ -142,12 +144,26 @@ const adminLimiter = rateLimit({
 });
 
 app.use(express.json({ limit: "50kb" }));
-app.use(express.static(path.join(__dirname, "public"), {
+
+// PHP soubory a storage/ jsou jen pro hosting VEDOS — tady je nikdy neservírovat jako text.
+// /api/content.php a /api/verify.php obsluhují routy níže stejně jako PHP na VEDOS.
+app.use((req, res, next) => {
+  const p = req.path;
+  if (p.startsWith("/storage/") || /\.(php|htaccess)$/i.test(p) || p.endsWith("/.htaccess")) {
+    if (p === "/api/content.php" || p === "/api/verify.php") return next();
+    return res.status(404).sendFile(path.join(__dirname, "public", "404.html"));
+  }
+  next();
+});
+
+const serveStatic = express.static(path.join(__dirname, "public"), {
   maxAge: "7d",
   setHeaders(res, filePath) {
-    if (filePath.endsWith(".html")) res.setHeader("Cache-Control", "no-cache");
+    if (/\.(html|json)$/.test(filePath)) res.setHeader("Cache-Control", "no-cache");
   },
-}));
+});
+// .php se nikdy neposílá jako soubor — /api/*.php obslouží routy níže
+app.use((req, res, next) => (/\.php$/i.test(req.path) ? next() : serveStatic(req, res, next)));
 
 // --- Videos API ---
 
@@ -198,13 +214,13 @@ async function commitToGitHub(data) {
 
 // --- Content API ---
 
-app.get("/api/content", async (req, res) => {
+app.get(["/api/content", "/api/content.php"], async (req, res) => {
   const content = await readContent();
   if (!content) return res.status(404).json({ error: "Obsah nenalezen." });
   res.json(content);
 });
 
-app.post("/api/content", adminLimiter, requireAdminPassword, async (req, res) => {
+app.post(["/api/content", "/api/content.php"], adminLimiter, requireAdminPassword, async (req, res) => {
   const body = req.body;
   if (!body || typeof body !== "object" || Array.isArray(body)) {
     return res.status(400).json({ error: "Neplatný formát dat." });
@@ -224,7 +240,7 @@ app.post("/api/content", adminLimiter, requireAdminPassword, async (req, res) =>
 
 // --- Admin auth verify ---
 
-app.get("/api/admin/verify", adminLimiter, requireAdminPassword, (req, res) => {
+app.get(["/api/admin/verify", "/api/verify.php"], adminLimiter, requireAdminPassword, (req, res) => {
   res.json({ ok: true });
 });
 
