@@ -630,6 +630,7 @@
     transition:border-color .15s, color .15s, background .15s;
   }
   .contact-cta-btn:hover{border-color:var(--amber); color:var(--amber);}
+  .contact-cta-email{text-transform:none; overflow-wrap:anywhere;}
   .contact-social-strip{
     display:flex; flex-wrap:wrap; gap:0;
     border-top:1px solid var(--line);
@@ -1004,6 +1005,8 @@
       if (cta) {
         var ctaHtml = '';
         if (c.emailLabel && c.emailLabel !== 'E-mail') ctaHtml += '<div class="contact-cta-btn">' + esc(c.emailLabel) + '</div>';
+        var email = String(c.emailHref || '').trim().replace(/^mailto:/i, '');
+        if (/^[^\s@<>"]+@[^\s@<>"]+\.[^\s@<>"]+$/.test(email)) ctaHtml += '<a class="contact-cta-btn contact-cta-email" href="mailto:' + esc(email) + '">' + esc(email) + ' →</a>';
         if (c.phoneLabel && c.phoneLabel !== 'Telefon') ctaHtml += '<div class="contact-cta-btn">' + esc(c.phoneLabel) + '</div>';
         if (ctaHtml) cta.innerHTML = ctaHtml;
       }
