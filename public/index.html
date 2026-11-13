@@ -1008,6 +1008,15 @@
         var email = String(c.emailHref || '').trim().replace(/^mailto:/i, '');
         if (/^[^\s@<>"]+@[^\s@<>"]+\.[^\s@<>"]+$/.test(email)) ctaHtml += '<a class="contact-cta-btn contact-cta-email" href="mailto:' + esc(email) + '">' + esc(email) + ' →</a>';
         if (c.phoneLabel && c.phoneLabel !== 'Telefon') ctaHtml += '<div class="contact-cta-btn">' + esc(c.phoneLabel) + '</div>';
+        var phone = String(c.phoneHref || '').trim().replace(/^tel:/i, '').replace(/[\s\-\/().]/g, '');
+        if (/^00/.test(phone)) phone = '+' + phone.slice(2);
+        if (/^\d{9}$/.test(phone)) phone = '+420' + phone;
+        if (/^\+\d{8,15}$/.test(phone)) {
+          var phoneText = phone.indexOf('+420') === 0
+            ? '+420 ' + phone.slice(4).replace(/(\d{3})(?=\d)/g, '$1 ')
+            : phone;
+          ctaHtml += '<a class="contact-cta-btn contact-cta-email" href="tel:' + esc(phone) + '">' + esc(phoneText) + ' →</a>';
+        }
         if (ctaHtml) cta.innerHTML = ctaHtml;
       }
 
