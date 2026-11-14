@@ -702,7 +702,7 @@ function populateForm(data) {
   // Roster
   const rc = document.getElementById('roster-container');
   rc.innerHTML = '';
-  (data.roster || []).forEach(function (m) { addRosterRow(m.role, m.desc, m.photo); });
+  (data.roster || []).forEach(function (m) { addRosterRow(m.role, m.desc, m.photo, m.photo2); });
 
   // Gigs
   var gc = document.getElementById('gigs-container');
@@ -737,8 +737,8 @@ function addStatRow(num, lbl) {
 }
 
 // --- ROSTER ROWS ---
-function addRosterRow(role, desc, photo) {
-  role = role || ''; desc = desc || ''; photo = photo || '';
+function addRosterRow(role, desc, photo, photo2) {
+  role = role || ''; desc = desc || ''; photo = photo || ''; photo2 = photo2 || '';
   const container = document.getElementById('roster-container');
   const row = document.createElement('div');
   row.className = 'row';
@@ -746,6 +746,7 @@ function addRosterRow(role, desc, photo) {
     '<input class="input role-input" style="max-width:160px" placeholder="Role (Zpěv…)" value="' + ea(role) + '">' +
     '<input class="input desc-input" placeholder="Popis (na webu se nezobrazuje)" value="' + ea(desc) + '">' +
     '<input type="hidden" class="photo-input" value="' + ea(photo) + '">' +
+    '<input type="hidden" class="photo2-input" value="' + ea(photo2) + '">' +
     '<button class="btn-remove" title="Odebrat">×</button>';
   container.appendChild(row);
 }
@@ -832,7 +833,10 @@ function collectData() {
     var role = row.querySelector('.role-input').value.trim();
     var desc = row.querySelector('.desc-input').value.trim();
     var photo = row.querySelector('.photo-input') ? row.querySelector('.photo-input').value.trim() : '';
-    if (role || desc) roster.push({ role: role, desc: desc, photo: photo });
+    var photo2 = row.querySelector('.photo2-input') ? row.querySelector('.photo2-input').value.trim() : '';
+    var member = { role: role, desc: desc, photo: photo };
+    if (photo2) member.photo2 = photo2;
+    if (role || desc) roster.push(member);
   });
 
   var gigs = [];

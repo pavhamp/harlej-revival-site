@@ -70,7 +70,8 @@
     {
       "role": "Bicí",
       "desc": "Tempo, které nedovolí publiku vystřízlivět.",
-      "photo": "/img/bici.jpg"
+      "photo": "/img/bici.jpg",
+      "photo2": "/img/bici2.jpg"
     },
     {
       "role": "Kytara",

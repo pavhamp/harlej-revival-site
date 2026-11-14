@@ -458,6 +458,25 @@
     filter:grayscale(15%) contrast(1.05);
     transition:filter .3s ease, transform .3s ease;
   }
+  .roster .member-photos{
+    position:relative;
+    overflow:hidden;
+  }
+  .roster .member-photo-alt{
+    position:absolute;
+    inset:0;
+    height:100%;
+    opacity:0;
+    animation:member-swap 10s ease-in-out infinite;
+  }
+  @keyframes member-swap{
+    0%, 40%   { opacity:0; }
+    50%, 90%  { opacity:1; }
+    100%      { opacity:0; }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .roster .member-photo-alt{ animation:none; }
+  }
   .member-card:hover .member-photo{
     filter:grayscale(0%) contrast(1.05);
     transform:scale(1.03);
@@ -999,6 +1018,12 @@
     if (ro && d.roster) {
       ro.innerHTML = d.roster.map(function (m) {
         var photo = m.photo ? '<img class="member-photo" src="' + esc(m.photo) + '" alt="' + esc(m.role) + '" loading="lazy">' : '';
+        // druhá fotka (např. dva bubeníci) — obě se v kartě plynule střídají
+        if (m.photo && m.photo2) {
+          photo = '<div class="member-photos">' + photo +
+            '<img class="member-photo member-photo-alt" src="' + esc(m.photo2) + '" alt="' + esc(m.role) + '" loading="lazy">' +
+            '</div>';
+        }
         // popisky členů se na webu nezobrazují (zůstávají jen v datech)
         return '<div class="member-card">' + photo + '<div class="member-info"><div class="role">' + esc(m.role) + '</div></div></div>';
       }).join('');
