@@ -744,7 +744,7 @@ function addRosterRow(role, desc, photo) {
   row.className = 'row';
   row.innerHTML =
     '<input class="input role-input" style="max-width:160px" placeholder="Role (Zpěv…)" value="' + ea(role) + '">' +
-    '<input class="input desc-input" placeholder="Stručný popis" value="' + ea(desc) + '">' +
+    '<input class="input desc-input" placeholder="Popis (na webu se nezobrazuje)" value="' + ea(desc) + '">' +
     '<input type="hidden" class="photo-input" value="' + ea(photo) + '">' +
     '<button class="btn-remove" title="Odebrat">×</button>';
   container.appendChild(row);

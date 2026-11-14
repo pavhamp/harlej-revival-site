@@ -452,10 +452,10 @@
   }
   .roster .role{
     font-family:'Space Mono', monospace;
-    font-size:0.7rem;
+    font-size:1.05rem;
     letter-spacing:1px;
     text-transform:uppercase;
-    color:var(--amber);
+    color:var(--paper);
   }
   .roster .desc{
     font-size:0.88rem;
@@ -854,7 +854,7 @@
         <span>Festivaly</span>
         <span>Městské slavnosti</span>
         <span>Předvánoční programy</span>
-        <span>Plesy a oslavy</span>
+        <span>Rockové plesy a oslavy</span>
       </div>
       <p class="lede" id="about-tagline" style="margin-top:0;">Vystupujeme po celé ČR — od menších náměstí po revival festivaly s dalšími kapelami na pódiu.</p>
     </div>
@@ -982,7 +982,8 @@
     if (ro && d.roster) {
       ro.innerHTML = d.roster.map(function (m) {
         var photo = m.photo ? '<img class="member-photo" src="' + esc(m.photo) + '" alt="' + esc(m.role) + '" loading="lazy">' : '';
-        return '<div class="member-card">' + photo + '<div class="member-info"><div class="role">' + esc(m.role) + '</div>' + (m.desc ? '<div class="desc">' + esc(m.desc) + '</div>' : '') + '</div></div>';
+        // popisky členů se na webu nezobrazují (zůstávají jen v datech)
+        return '<div class="member-card">' + photo + '<div class="member-info"><div class="role">' + esc(m.role) + '</div></div></div>';
       }).join('');
     }
 
