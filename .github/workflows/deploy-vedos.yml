@@ -1,0 +1,62 @@
+# Po každém pushi na master nahraje obsah složky public/ na hosting VEDOS přes FTP.
+# Potřebné údaje se zadávají v GitHubu: Settings → Secrets and variables → Actions.
+#   Secrets:   FTP_SERVER, FTP_USERNAME, FTP_PASSWORD, ADMIN_PASSWORD
+#   Variables (nepovinné): FTP_SERVER_DIR (výchozí "www/"), FTP_PROTOCOL (výchozí "ftps")
+# Dokud FTP_SERVER není vyplněný, nasazení se přeskočí.
+
+name: Nasazení na VEDOS
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-vedos
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      FTP_SERVER: ${{ secrets.FTP_SERVER }}
+    steps:
+      - name: Přeskočit, pokud FTP není nastavené
+        if: env.FTP_SERVER == ''
+        run: echo "::notice::FTP_SERVER není nastavený v Secrets — nasazení na VEDOS se přeskakuje."
+
+      - uses: actions/checkout@v4
+        if: env.FTP_SERVER != ''
+
+      - name: Kontrola PHP souborů
+        if: env.FTP_SERVER != ''
+        run: for f in public/api/*.php; do php -l "$f"; done
+
+      - name: Vytvořit api/config.php s heslem do adminu
+        if: env.FTP_SERVER != ''
+        env:
+          ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
+        run: |
+          if [ -z "$ADMIN_PASSWORD" ]; then
+            echo "::error::Chybí secret ADMIN_PASSWORD."; exit 1
+          fi
+          php -r 'file_put_contents("public/api/config.php", "<?php\nreturn " . var_export(["admin_password" => getenv("ADMIN_PASSWORD")], true) . ";\n");'
+          php -l public/api/config.php
+
+      - name: Nahrát na VEDOS
+        if: env.FTP_SERVER != ''
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ${{ vars.FTP_PROTOCOL || 'ftps' }}
+          local-dir: ./public/
+          server-dir: ${{ vars.FTP_SERVER_DIR || 'www/' }}
+          # obsah uložený z adminu na serveru se nikdy nepřepisuje ani nemaže
+          exclude: |
+            **/.git*
+            **/.git*/**
+            storage/content.json
+            storage/backups/**
+            storage/login-attempts.json

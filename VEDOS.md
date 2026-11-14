@@ -22,7 +22,36 @@ www/
 ├── img/  audio/  video/
 ```
 
-## První nasazení
+## Automatické nasazení přes GitHub (doporučeno)
+
+Po každém pushi na `master` GitHub sám nahraje obsah `public/` na VEDOS přes FTP
+(soubor `.github/workflows/deploy-vedos.yml`). Nahrávají se jen změněné soubory;
+obsah uložený z adminu (`storage/`) se nikdy nepřepíše ani nesmaže.
+
+Jednorázové nastavení na GitHubu — repozitář → **Settings → Secrets and variables → Actions**:
+
+| Secret | Hodnota |
+|---|---|
+| `FTP_SERVER` | adresa FTP serveru z administrace VEDOS |
+| `FTP_USERNAME` | FTP uživatel |
+| `FTP_PASSWORD` | FTP heslo |
+| `ADMIN_PASSWORD` | heslo do admin panelu (z něj se na serveru vytvoří `api/config.php`) |
+
+Nepovinné **Variables** (záložka Variables vedle Secrets):
+
+| Variable | Výchozí | Kdy změnit |
+|---|---|---|
+| `FTP_SERVER_DIR` | `www/` | když se složka webu na FTP jmenuje jinak (musí končit `/`) |
+| `FTP_PROTOCOL` | `ftps` | když šifrované FTPS nefunguje, nastavte `ftp` |
+
+Pak v záložce **Actions** spusťte „Nasazení na VEDOS“ → **Run workflow**
+(nebo stačí další push). Průběh a případné chyby jsou vidět tamtéž.
+
+Dokud není `FTP_SERVER` vyplněný, workflow se jen přeskočí — nic se nerozbije.
+
+Ruční nahrání přes FTP níže pak není potřeba (kromě kroků 1, 4, 5 a 6).
+
+## První nasazení (ruční přes FTP)
 
 1. **Tarif:** stačí LowCost (web má ~100 MB). V administraci VEDOS u webhostingu
    nastavte **PHP 8.x**.
