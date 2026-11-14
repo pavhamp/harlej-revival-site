@@ -35,7 +35,8 @@
   },
   "contactSection": {
     "kicker": "kontakt",
-    "heading": "Máte termín?\nPojďme ho zaplnit."
+    "heading": "Máte termín?\nPojďme ho zaplnit.",
+    "socialLabel": "Mrkněte na naše sociální sítě"
   },
   "stats": [
     {

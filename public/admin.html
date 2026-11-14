@@ -451,6 +451,10 @@
         <label class="field-label" for="contact-heading-inp">Nadpis (nový řádek = Enter)</label>
         <textarea class="input" id="contact-heading-inp"></textarea>
       </div>
+      <div class="field-group">
+        <label class="field-label" for="contact-social-inp">Text nad odkazy na sociální sítě (prázdné = nezobrazit)</label>
+        <input class="input" type="text" id="contact-social-inp">
+      </div>
     </div>
 
     <!-- STATISTIKY -->
@@ -692,6 +696,7 @@ function populateForm(data) {
   var con = data.contactSection || {};
   document.getElementById('contact-kicker-inp').value = con.kicker || '';
   document.getElementById('contact-heading-inp').value = con.heading || '';
+  document.getElementById('contact-social-inp').value = con.socialLabel || '';
 
   // Stats
   const sc = document.getElementById('stats-container');
@@ -893,7 +898,8 @@ function collectData() {
     },
     contactSection: {
       kicker: document.getElementById('contact-kicker-inp').value.trim(),
-      heading: document.getElementById('contact-heading-inp').value.trim()
+      heading: document.getElementById('contact-heading-inp').value.trim(),
+      socialLabel: document.getElementById('contact-social-inp').value.trim()
     },
     stats: stats,
     roster: roster,

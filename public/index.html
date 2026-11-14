@@ -677,8 +677,21 @@
   }
   .contact-cta-btn:hover{border-color:var(--amber); color:var(--amber);}
   .contact-cta-email{text-transform:none; overflow-wrap:anywhere;}
+  .contact-social-label{
+    font-family:'Anton', sans-serif;
+    font-weight:400;
+    text-transform:uppercase;
+    letter-spacing:0.5px;
+    font-size:clamp(1.3rem, 3vw, 1.7rem);
+    color:var(--paper);
+    border-top:1px solid var(--line);
+    padding-top:28px;
+    margin:0 0 18px;
+  }
   .contact-social-strip{
     display:flex; flex-wrap:wrap; gap:0;
+  }
+  .contact-social-label[hidden] + .contact-social-strip{
     border-top:1px solid var(--line);
     padding-top:28px;
   }
@@ -927,6 +940,7 @@
     <div class="kicker reveal" id="contact-kicker">kontakt</div>
     <h2 class="h2 reveal" id="contact-heading" style="--reveal-delay:80ms; margin-bottom:40px;">Máte termín?<br>Pojďme ho zaplnit.</h2>
     <div class="contact-cta-row reveal" style="--reveal-delay:160ms" id="contact-cta"></div>
+    <p class="contact-social-label reveal" style="--reveal-delay:200ms" id="contact-social-label">Mrkněte na naše sociální sítě</p>
     <div class="contact-social-strip reveal" style="--reveal-delay:240ms" id="contact-social"></div>
   </div>
 </section>
@@ -1004,6 +1018,10 @@
     if (d.contactSection) {
       setText('contact-kicker', d.contactSection.kicker);
       setHTML('contact-heading', escNl(d.contactSection.heading));
+      if ('socialLabel' in d.contactSection) {
+        setText('contact-social-label', d.contactSection.socialLabel);
+        document.getElementById('contact-social-label').hidden = !d.contactSection.socialLabel;
+      }
     }
 
 
