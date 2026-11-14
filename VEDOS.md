@@ -67,16 +67,15 @@ Ruční nahrání přes FTP níže pak není potřeba (kromě kroků 1, 4, 5 a 6
    HTTPS certifikát (Let's Encrypt). Až HTTPS funguje, odkomentujte v
    `www/.htaccess` blok „Přesměrování na HTTPS“.
 6. **Adresy webu:** v `public/index.html` (OG tagy, JSON-LD), `public/sitemap.xml`
-   a `public/robots.txt` je zatím adresa `harlej-revival-site.onrender.com` —
-   nahraďte ji novou doménou.
+   a `public/robots.txt` je nastavená doména `https://harlejrevival.cz`.
 
 ## Kontrola po nahrání
 
-- `https://vase-domena.cz/` — web se zobrazí, v kontaktu je e-mail a telefon
-- `https://vase-domena.cz/api/content.php` — vrátí JSON s obsahem
-- `https://vase-domena.cz/api/config.php` — **musí** vrátit chybu 403/404
-- `https://vase-domena.cz/storage/` — **musí** vrátit chybu 403
-- `https://vase-domena.cz/admin.html` — přihlášení heslem z `config.php`, uložení změny
+- `https://harlejrevival.cz/` — web se zobrazí, v kontaktu je e-mail a telefon
+- `https://harlejrevival.cz/api/content.php` — vrátí JSON s obsahem
+- `https://harlejrevival.cz/api/config.php` — **musí** vrátit chybu 403/404
+- `https://harlejrevival.cz/storage/` — **musí** vrátit chybu 403
+- `https://harlejrevival.cz/admin.html` — přihlášení heslem z `config.php`, uložení změny
 
 ## Aktualizace webu později
 
