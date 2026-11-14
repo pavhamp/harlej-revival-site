@@ -306,10 +306,21 @@
     display:flex; align-items:center; gap:10px;
     margin-bottom:36px;
   }
+  .eyebrow[hidden]{display:none;}
   h1.title{
     font-size:clamp(3.2rem, 9vw, 6.4rem);
     line-height:0.92;
     color:var(--paper);
+  }
+  .hero-brand{
+    display:flex;
+    align-items:center;
+    gap:clamp(16px, 3vw, 32px);
+  }
+  .hero-logo{
+    width:clamp(96px, 18vw, 190px);
+    height:auto;
+    flex-shrink:0;
   }
   h1.title .accent{color:var(--rust); -webkit-text-stroke:1.5px var(--paper); text-stroke:1.5px var(--paper);}
   .subhead{
@@ -834,8 +845,11 @@
   <div class="wrap">
     <div class="hero-inner">
       <div class="hero-text">
-        <div class="eyebrow" id="hero-eyebrow">jediná revivalová skupina harlej v čr</div>
-        <h1 class="title" id="hero-title">HARLEJ<br><span class="accent">REVIVAL.</span></h1>
+        <div class="eyebrow" id="hero-eyebrow" hidden></div>
+        <div class="hero-brand">
+          <h1 class="title" id="hero-title">HARLEJ<br><span class="accent">REVIVAL.</span></h1>
+          <img class="hero-logo" src="/img/logo.png" alt="Logo Harlej Revival Band Olomouc" width="500" height="500">
+        </div>
         <p class="subhead" id="hero-subhead">Hrajeme to nejlepší z Harleje s energií, náloží a upřímnou úctou k originálu.</p>
         <div class="cta-row">
           <a class="btn btn-solid" href="#kontakt" id="hero-cta">Poptat vystoupení</a>
@@ -936,6 +950,7 @@
     if (d.hero) {
       var h = d.hero;
       setText('hero-eyebrow', h.eyebrow);
+      document.getElementById('hero-eyebrow').hidden = !h.eyebrow; // zobrazit jen, když je vyplněné v adminu
       setText('hero-subhead', h.subhead);
       setText('hero-cta', h.ctaLabel);
       if (h.titleLines) {
