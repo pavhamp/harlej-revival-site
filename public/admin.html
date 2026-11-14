@@ -417,6 +417,10 @@
         <label class="field-label" for="gigs-lede-inp">Popis</label>
         <input class="input" type="text" id="gigs-lede-inp">
       </div>
+      <div class="field-group">
+        <label class="field-label" for="gigs-note-inp">Text pod termíny (velkým písmem, prázdné = nezobrazit)</label>
+        <input class="input" type="text" id="gigs-note-inp">
+      </div>
     </div>
 
     <!-- UKÁZKY TEXTY -->
@@ -676,6 +680,7 @@ function populateForm(data) {
   document.getElementById('gigs-kicker-inp').value = gs.kicker || '';
   document.getElementById('gigs-heading-inp').value = gs.heading || '';
   document.getElementById('gigs-lede-inp').value = gs.lede || '';
+  document.getElementById('gigs-note-inp').value = gs.note || '';
 
   // Ukázky texty
   var cs = data.chorusSection || {};
@@ -874,7 +879,8 @@ function collectData() {
     gigsSection: {
       kicker: document.getElementById('gigs-kicker-inp').value.trim(),
       heading: document.getElementById('gigs-heading-inp').value.trim(),
-      lede: document.getElementById('gigs-lede-inp').value.trim()
+      lede: document.getElementById('gigs-lede-inp').value.trim(),
+      note: document.getElementById('gigs-note-inp').value.trim()
     },
     chorusSection: {
       kicker: document.getElementById('chorus-kicker-inp').value.trim(),

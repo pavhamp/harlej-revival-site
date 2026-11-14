@@ -25,7 +25,8 @@
   "gigsSection": {
     "kicker": "kde nás najdete",
     "heading": "Nadcházející\nvystoupení.",
-    "lede": "Přijďte si zazpívat naživo — sledujte termíny a rezervujte si místo včas."
+    "lede": "",
+    "note": "Ladíme kalendář na rok 2027"
   },
   "chorusSection": {
     "kicker": "ukázky",
@@ -196,6 +197,12 @@
       "date": "2026-10-23",
       "venue": "",
       "city": "Žiželice nad Cidlinou",
+      "ticketHref": ""
+    },
+    {
+      "date": "2026-12-12",
+      "venue": "Náměstí — Vánoční trhy, 18:45",
+      "city": "Konice",
       "ticketHref": ""
     }
   ],
