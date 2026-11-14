@@ -418,6 +418,17 @@
     margin-top:0;
   }
   @media(min-width:800px){ .about-intro{grid-template-columns:1fr 1fr; align-items:start;} }
+  .about-tagline{
+    font-family:'Anton', sans-serif;
+    font-weight:400;
+    text-transform:uppercase;
+    letter-spacing:0.5px;
+    line-height:1.1;
+    font-size:clamp(1.8rem, 4.5vw, 2.6rem);
+    text-align:center;
+    grid-column:1 / -1;
+    margin:12px 0 0;
+  }
   .roster{
     display:grid;
     grid-template-columns:repeat(2,1fr);
@@ -857,7 +868,7 @@
         <span>Předvánoční programy</span>
         <span>Rockové plesy a oslavy</span>
       </div>
-      <p class="lede" id="about-tagline" style="margin-top:0;">Vystupujeme po celé ČR — od menších náměstí po revival festivaly s dalšími kapelami na pódiu.</p>
+      <p class="about-tagline" id="about-tagline">Vystupujeme po celé ČR!</p>
     </div>
 
     <div class="roster reveal" id="roster" style="--reveal-delay:320ms"></div>
